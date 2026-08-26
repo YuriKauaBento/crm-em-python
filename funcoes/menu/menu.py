@@ -42,4 +42,12 @@ class Menu_consulta(Menu_base):
         )
         return self.msg
 
+    def menu_consulta(self):
+        self.msg = (
+            "1. Buscar nome\n"
+            "2. Buscar telefone\n"
+            "3. Buscar CPF/CNPJ\n"
+            "4. Buscar codigo\n"
+            "5. Voltar\n"
+        )
 
