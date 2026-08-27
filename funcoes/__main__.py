@@ -39,20 +39,19 @@ def main():
                         print('Digite apenas numeros!')
 
                 if op_consulta == 1:
-                    consulta_cliente = int(input(Menu_consulta().menu_consulta()))
-                    if consulta_cliente == 1:
+                    consulta = int(input(Menu_consulta().menu_consulta()))
+                    if consulta == 1:
                         a = input("DIgite o nome: ")
                         print(buscar_nome(a))
-                    elif consulta_cliente == 2:
+                    elif consulta == 2:
                         a = input("Digite o telefone:")
                         print(buscar_telefone(a))
-                    elif consulta_cliente == 3:
+                    elif consulta == 3:
                         a = input("Digite o CPF/CNPJ: ")
                         print(buscar_cpf(a))
-                    elif consulta_cliente  == 4:
+                    elif consulta == 4:
                         a = input("Digite o codigo: ")
                         print(buscar_codigo(a))
-
 
             #elif op == 3:
 
