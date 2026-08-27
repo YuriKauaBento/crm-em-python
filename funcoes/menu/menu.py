@@ -21,7 +21,7 @@ class Menu_inicial(Menu_base):
 
 
 class Menu_cadastro(Menu_base):
-    def menu1(self):
+    def exibir(self):
         self.msg = (
             "1. Cadastro de clientes\n"
             "2. Cadastro de fornecedores\n"
@@ -32,7 +32,7 @@ class Menu_cadastro(Menu_base):
 
 
 class Menu_consulta(Menu_base):
-    def menu2(self):
+    def exibir(self):
         self.msg = (
             "1. Consulta de clientes\n"
             "2. Consulta de fornecedores\n"

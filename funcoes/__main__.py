@@ -4,34 +4,62 @@ from funcoes.Consulta.consulta import *
 
 def main():
     while True:
-        op = input(Menu_inicial())
+        op = int(input(Menu_inicial().exibir()))
         try:
             if op == 1:
-                op_cadastro = input(Menu_cadastro.menu1())
+                op_cadastro = int(input(Menu_cadastro().exibir()))
                 if op_cadastro == 1:
                     cliente = Cliente()
                     cliente.cadastrar()
                     print('Cliente cadastrado com sucesso!')
-                elif op == 2:
+                elif op_cadastro == 2:
                     fornecedor = Fornecedor()
                     fornecedor.cadastrar()
                     print('Fornecedor cadastrado com sucesso!')
-                elif op == 3:
+                elif op_cadastro == 3:
                     otica = Otica()
                     otica.cadastrar()
                     print('Otica cadastrada com sucesso!')
+                elif op_cadastro == 0:
+                    continue
+                else:
+                    print("Opcao invalida!")
+
             elif op == 0:
                 break
+            
             elif op == 2:
-                op_consulta = input(Menu_consulta.menu2())
+                op_consulta = None
+                while op_consulta not in (0,1,2,3,4):
+                    try:
+                        op_consulta = int(input(Menu_consulta().exibir()))
+                        if op_consulta not in (0,1,2,3,4):
+                            print('Opcao invalida!')
+                    except ValueError:
+                        print('Digite apenas numeros!')
+
                 if op_consulta == 1:
-                    consulta_cliente = input(Menu_consulta.menu_consulta())
+                    consulta_cliente = int(input(Menu_consulta().menu_consulta()))
                     if consulta_cliente == 1:
                         a = input("DIgite o nome: ")
-                        buscar_nome(a)
+                        print(buscar_nome(a))
                     elif consulta_cliente == 2:
                         a = input("Digite o telefone:")
-                        buscar_telefone(a)
+                        print(buscar_telefone(a))
+                    elif consulta_cliente == 3:
+                        a = input("Digite o CPF/CNPJ: ")
+                        print(buscar_cpf(a))
+                    elif consulta_cliente  == 4:
+                        a = input("Digite o codigo: ")
+                        print(buscar_codigo(a))
+
+
+            #elif op == 3:
+
         except sqlite3.OperationalError as e:
             print(f"Erro operacional ou de conexao com o SQLite")
+
+
+if __name__ == '__main__':
+    main()
             
