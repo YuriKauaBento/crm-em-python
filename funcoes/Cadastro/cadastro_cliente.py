@@ -23,6 +23,7 @@ class Cadastro(ABC):
                 cpf TEXT,
                 endereco TEXT,
                 telefone TEXT
+                ativo INTEGER DEFAULT 1
             )
         """)
         

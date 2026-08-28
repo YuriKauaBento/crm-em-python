@@ -8,7 +8,7 @@ def buscar_codigo(codigo):
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE id = ?",
+        "SELECT * FROM clientes WHERE id = ? AND ativo = 1",
         (codigo,)
     )
 
@@ -25,7 +25,7 @@ def buscar_nome(nome):
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE nome = ?",
+        "SELECT * FROM clientes WHERE nome = ? AND ativo = 1",
         (nome,)
     )
 
@@ -42,7 +42,7 @@ def buscar_cpf(cpf):
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE cpf = ?",
+        "SELECT * FROM clientes WHERE cpf = ? AND ativo = 1",
         (cpf,)
     )
 
@@ -59,7 +59,7 @@ def buscar_telefone(tel):
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM cliente WHERE telefone = ?",
+        "SELECT * FROM cliente WHERE telefone = ? AND ativo = 1",
         (tel,)
     )
 

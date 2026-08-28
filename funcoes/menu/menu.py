@@ -26,6 +26,7 @@ class Menu_cadastro(Menu_base):
             "1. Cadastro de clientes\n"
             "2. Cadastro de fornecedores\n"
             "3. Cadastro de oticas\n"
+            "4. Alteracao de cadastro\n"
             "0. Voltar\n"
         )
         return self.msg

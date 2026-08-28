@@ -1,6 +1,7 @@
 from funcoes.Cadastro.cadastro_cliente import *
 from funcoes.menu.menu import *
 from funcoes.Consulta.consulta import *
+from funcoes.Alterar.alterar import *
 
 def main():
     while True:
@@ -20,6 +21,8 @@ def main():
                     otica = Otica()
                     otica.cadastrar()
                     print('Otica cadastrada com sucesso!')
+                elif op_cadastro == 4:
+                    alteracao()
                 elif op_cadastro == 0:
                     continue
                 else:
