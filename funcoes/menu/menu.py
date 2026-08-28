@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from funcoes.Alterar.alterar import *
 
 class Menu_base(ABC):
     def __init__(self):
@@ -52,3 +53,20 @@ class Menu_consulta(Menu_base):
             "5. Voltar\n"
         )
 
+    class Menu_alteracao(Menu_base):
+        def exibir(self):
+            self.msg = "ALTERACAO DE CADASTRO"
+            
+            cod = input("Informe o codigo do cliente")
+            print("SELECT * FROM clientes WHERE id = ?",
+            (cod,)
+            )
+
+            print("Informe apenas as informações a serem alteradas")
+
+            nome = input("Informe o nome se foi alterado.")
+            cpf = input("Informe o cpf se foi alterado.")
+            tel = input("Informe o telefone se foi alterado")
+            end = input("Informe o telefone se foi alterado.")
+
+            alteracao(cod, nome, cpf, tel, end)

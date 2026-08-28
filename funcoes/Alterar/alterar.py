@@ -1,6 +1,6 @@
 from funcoes.database.database import *
 
-def alteracao(codigo,nome=None,cpf=None,telefone=None,endereco=None):
+def alteracao(codigo,nome='',cpf='',telefone='',endereco=''):
     conexao = conectar()
     cursor = conexao.cursor()
 
