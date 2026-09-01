@@ -16,16 +16,7 @@ class Cadastro(ABC):
         conexao = conectar()
         cursor = conexao.cursor()
         
-        cursor.execute(f"""
-            CREATE TABLE IF NOT EXISTS {self.tabela} (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT,
-                cpf TEXT,
-                endereco TEXT,
-                telefone TEXT
-                ativo INTEGER DEFAULT 1
-            )
-        """)
+        criar_tabelas()
         
         cursor.execute(f"""
             INSERT INTO {self.tabela} (nome, cpf, endereco, telefone) 

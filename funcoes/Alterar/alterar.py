@@ -32,8 +32,8 @@ def alteracao(codigo,nome='',cpf='',telefone='',endereco=''):
 
     db = f"""
         UPDATE clientes
-        SET{",".join(campos)}
-        WHERE codigo = ?
+        SET {",".join(campos)}
+        WHERE id = ?
 """
 
     cursor.execute(db, valores)
@@ -59,9 +59,8 @@ def excluir(codigo=None, cpf=None):
         )
 
     else:
-        print("Nenhum codigo ou cpf foi informado.")
-        conexao.close()
-
+        return "Nenhum codigo ou cpf foi informado."
+    
     conexao.commit()
 
     if cursor.rowcount > 0:

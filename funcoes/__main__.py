@@ -5,8 +5,9 @@ from funcoes.Alterar.alterar import *
 
 def main():
     while True:
-        op = int(input(Menu_inicial().exibir()))
         try:
+            op = int(input(Menu_inicial().exibir()))
+
             if op == 1:
                 op_cadastro = int(input(Menu_cadastro().exibir()))
                 if op_cadastro == 1:
@@ -59,7 +60,7 @@ def main():
             #elif op == 3:
 
         except sqlite3.OperationalError as e:
-            print(f"Erro operacional ou de conexao com o SQLite")
+            print(f"Erro no SQLite: {e}")
 
 
 if __name__ == '__main__':

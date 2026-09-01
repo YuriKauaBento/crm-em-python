@@ -59,7 +59,7 @@ def buscar_telefone(tel):
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM cliente WHERE telefone = ? AND ativo = 1",
+        "SELECT * FROM clientes WHERE telefone = ? AND ativo = 1",
         (tel,)
     )
 
