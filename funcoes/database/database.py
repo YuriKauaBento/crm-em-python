@@ -24,7 +24,7 @@ def criar_tabelas():
         CREATE TABLE IF NOT EXISTS fonecedor(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
-            cpf TEXT,
+            cnpj TEXT,
             endereco TEXT,
             telefone TEXT,
             ativo INTEGER NOT NULL DEFAULT 1
@@ -35,7 +35,7 @@ def criar_tabelas():
         CREATE TABLE IF NOT EXISTS otica(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
-            cpf TEXT,
+            cnpj TEXT,
             endereco TEXT,
             telefone TEXT,
             ativo INTEGER NOT NULL DEFAULT 1
@@ -43,3 +43,16 @@ def criar_tabelas():
     """)
     conexao.commit()
     conexao.close()
+
+
+def excluir(tabela, id):
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute(f"""
+        UPDATE {tabela} SET ativo = 0 WHERE id = ?,
+        {id,}
+    """)
+
+    conexao.close
+    return "Cadastro desativado!"

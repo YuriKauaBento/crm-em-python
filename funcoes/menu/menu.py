@@ -70,3 +70,7 @@ class Menu_alteracao(Menu_base):
         end = input("Informe o telefone se foi alterado.")
 
         alteracao(cod, nome, cpf, tel, end)
+
+
+class Menu_exclusao(Menu_base):
+    

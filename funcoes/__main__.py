@@ -23,7 +23,7 @@ def main():
                     otica.cadastrar()
                     print('Otica cadastrada com sucesso!')
                 elif op_cadastro == 4:
-                    alteracao()
+                    Menu_alteracao.exibir()
                 elif op_cadastro == 0:
                     continue
                 else:
