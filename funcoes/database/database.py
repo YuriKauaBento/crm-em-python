@@ -45,14 +45,27 @@ def criar_tabelas():
     conexao.close()
 
 
-def excluir(tabela, id):
+def excluir(tabela=None, id=None, cpf=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    cursor.execute(f"""
-        UPDATE {tabela} SET ativo = 0 WHERE id = ?,
-        {id,}
+    if id:
+        cursor.execute(f"""
+            UPDATE {tabela} SET ativo = 0 WHERE id = ?,
+            {id,}
+        """)
+
+    elif cpf:
+        cursor.execute(f"""
+            UPDATE {tabela} SET ativo = 0 WHERE cpf = ?,
+            {cpf,}
     """)
 
-    conexao.close
-    return "Cadastro desativado!"
+    if cursor.rowcount > 0:
+        sucesso = "Cadastro cancelado com sucesso!"
+    else:
+        sucesso = "Cliente não encontrado."
+
+    conexao.commit()
+    conexao.close()
+    return sucesso

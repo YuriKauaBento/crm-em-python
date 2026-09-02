@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from funcoes.Alterar.alterar import *
+from funcoes.database.database import excluir
 
 class Menu_base(ABC):
     def __init__(self):
@@ -73,4 +74,22 @@ class Menu_alteracao(Menu_base):
 
 
 class Menu_exclusao(Menu_base):
-    
+    def exibir(self):
+        self.msg = "DESATIVAR CADASTRO"
+        tabela = input("Informe o tipo de cadastro\n"
+                       "1. clientesn\n"
+                       "2. fornecedores\n"
+                       "3. otica\n")
+
+        op = input("1. Cancelar por cpf/cnpj\n"
+                   "2. Cancelar por codigo\n")
+        if op == 1:
+            cpf = input("Informe o cpf")
+            if cpf == '':
+                cpf = None
+        elif op == 2:
+            codigo = input("Informe o codigo: ")
+            if codigo == '':
+                codigo = None
+
+        return excluir(tabela, codigo, cpf)
