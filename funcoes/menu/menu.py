@@ -59,9 +59,6 @@ class Menu_alteracao(Menu_base):
         self.msg = "ALTERACAO DE CADASTRO"
             
         cod = input("Informe o codigo do cliente")
-        print("SELECT * FROM clientes WHERE id = ?",
-        (cod,)
-        )
 
         print("Informe apenas as informações a serem alteradas")
 

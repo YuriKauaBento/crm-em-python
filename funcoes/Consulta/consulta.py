@@ -1,5 +1,3 @@
-from abc import ABC
-import sqlite3
 from funcoes.database.database import *
 
 def buscar_codigo(codigo):

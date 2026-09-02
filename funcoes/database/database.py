@@ -53,13 +53,13 @@ def excluir(tabela=None, id=None, cpf=None):
         cursor.execute(f"""
             UPDATE {tabela} SET ativo = 0 WHERE id = ?,
             {id,}
-        """)
+            """)
 
     elif cpf:
         cursor.execute(f"""
             UPDATE {tabela} SET ativo = 0 WHERE cpf = ?,
             {cpf,}
-    """)
+            """)
 
     if cursor.rowcount > 0:
         sucesso = "Cadastro cancelado com sucesso!"

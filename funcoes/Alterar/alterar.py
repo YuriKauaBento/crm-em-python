@@ -28,13 +28,14 @@ def alteracao(codigo,nome='',cpf='',telefone='',endereco=''):
         conexao.close()
         return
 
-    valores.append(codigo)
+    #valores.append(codigo)
 
     db = f"""
         UPDATE clientes
         SET {",".join(campos)}
-        WHERE id = ?
-"""
+        WHERE id = ?,
+        {codigo}
+        """
 
     cursor.execute(db, valores)
     conexao.commit()
@@ -42,7 +43,7 @@ def alteracao(codigo,nome='',cpf='',telefone='',endereco=''):
     conexao.close()
 
 
-def excluir(codigo=None, cpf=None):
+"""def excluir(codigo=None, cpf=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -69,4 +70,4 @@ def excluir(codigo=None, cpf=None):
         sucesso = "Cliente não encontrado."
 
     conexao.close()
-    return sucesso
+    return sucesso"""
