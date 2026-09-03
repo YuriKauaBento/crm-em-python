@@ -33,7 +33,7 @@ def main():
                 break
             
             elif op == 2:
-                op_consulta = None
+                op_consulta = 9
                 while op_consulta not in (0,1,2,3,4):
                     try:
                         op_consulta = int(input(Menu_consulta().exibir()))

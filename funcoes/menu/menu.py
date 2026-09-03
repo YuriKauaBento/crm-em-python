@@ -51,23 +51,28 @@ class Menu_consulta(Menu_base):
             "2. Buscar telefone\n"
             "3. Buscar CPF/CNPJ\n"
             "4. Buscar codigo\n"
-            "5. Voltar\n"
+            "0. Voltar\n"
         )
+        return self.msg
 
 class Menu_alteracao(Menu_base):
     def exibir(self):
         self.msg = "ALTERACAO DE CADASTRO"
-            
-        cod = input("Informe o codigo do cliente")
 
-        print("Informe apenas as informações a serem alteradas")
+        tabela = input(("Informe o tipo de cliente: "))
+        cod = input("Informe o codigo do cliente: ")
 
-        nome = input("Informe o nome se foi alterado.")
-        cpf = input("Informe o cpf se foi alterado.")
-        tel = input("Informe o telefone se foi alterado")
-        end = input("Informe o telefone se foi alterado.")
+        if localizar(cod, tabela) == 0:
+            return f'Usuário não existe'
+        else:
+            print("Informe apenas as informações a serem alteradas: ")
 
-        alteracao(cod, nome, cpf, tel, end)
+            nome = input("Informe o nome se foi alterado: ")
+            cpf = input("Informe o cpf se foi alterado: ")
+            tel = input("Informe o telefone se foi alterado: ")
+            end = input("Informe o telefone se foi alterado: ")
+
+            return alteracao(cod, tabela, nome, cpf, tel, end)
 
 
 class Menu_exclusao(Menu_base):

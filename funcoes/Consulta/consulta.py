@@ -24,10 +24,10 @@ def buscar_nome(nome):
 
     cursor.execute(
         "SELECT * FROM clientes WHERE nome = ? AND ativo = 1",
-        (nome,)
+        (f"%{nome}%",)
     )
 
-    cliente = cursor.fetchone()
+    cliente = cursor.fetchall()
 
     conexao.close()
 

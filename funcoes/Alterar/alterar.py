@@ -1,6 +1,27 @@
 from funcoes.database.database import *
 
-def alteracao(codigo,nome='',cpf='',telefone='',endereco=''):
+def localizar(codigo, tabela):
+    if not tabela.isalnum():
+        raise ValueError("Nome da tabela inválido")
+
+    conexao = None
+    try:
+        conexao = conectar()
+        cursor = conexao.cursor()
+
+        sql = (f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE id = ?,")
+        cursor.execute( sql, (codigo,))
+        resultado = cursor.fetchone()[0]
+        return bool(resultado)
+    
+    except sqlite3.OperationalError as e:
+        print(f"Erro no SQLite: {e}")
+        return False
+    finally:
+        if conexao:
+            conexao.close()
+
+def alteracao(codigo,tabela,nome=None,cpf=None,telefone=None,endereco=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -31,10 +52,10 @@ def alteracao(codigo,nome='',cpf='',telefone='',endereco=''):
     #valores.append(codigo)
 
     db = f"""
-        UPDATE clientes
+        UPDATE {tabela}
         SET {",".join(campos)}
         WHERE id = ?,
-        {codigo}
+        {codigo,}
         """
 
     cursor.execute(db, valores)
