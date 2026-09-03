@@ -1,5 +1,15 @@
 import sqlite3
 
+def validar_tabela(tabela):
+    tabelas_validas = {
+        "cliente",
+        "fornecedor"
+        "otica"
+    }
+    if tabela not in tabelas_validas:
+        raise ValueError("Tabela invalida")
+
+
 
 def conectar():
     return sqlite3.connect("banco.db")
@@ -10,10 +20,10 @@ def criar_tabelas():
     cursor = conexao.cursor()
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS clientes(
+        CREATE TABLE IF NOT EXISTS cliente(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
-            cpf TEXT,
+            doc TEXT,
             endereco TEXT,
             telefone TEXT,
             ativo INTEGER NOT NULL DEFAULT 1
@@ -21,10 +31,10 @@ def criar_tabelas():
     """)
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS fonecedor(
+        CREATE TABLE IF NOT EXISTS fornecedor(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
-            cnpj TEXT,
+            doc TEXT,
             endereco TEXT,
             telefone TEXT,
             ativo INTEGER NOT NULL DEFAULT 1
@@ -35,7 +45,7 @@ def criar_tabelas():
         CREATE TABLE IF NOT EXISTS otica(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
-            cnpj TEXT,
+            doc TEXT,
             endereco TEXT,
             telefone TEXT,
             ativo INTEGER NOT NULL DEFAULT 1
@@ -50,16 +60,14 @@ def excluir(tabela=None, id=None, cpf=None):
     cursor = conexao.cursor()
 
     if id:
-        cursor.execute(f"""
-            UPDATE {tabela} SET ativo = 0 WHERE id = ?,
-            {id,}
-            """)
+        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE id = ?",
+            (id,)
+            )
 
     elif cpf:
-        cursor.execute(f"""
-            UPDATE {tabela} SET ativo = 0 WHERE cpf = ?,
-            {cpf,}
-            """)
+        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE cpf = ?",
+            (cpf,)
+            )
 
     if cursor.rowcount > 0:
         sucesso = "Cadastro cancelado com sucesso!"

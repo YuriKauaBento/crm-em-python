@@ -23,7 +23,7 @@ def buscar_nome(nome):
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE nome = ? AND ativo = 1",
+        "SELECT * FROM cliente WHERE nome = ? AND ativo = 1",
         (f"%{nome}%",)
     )
 

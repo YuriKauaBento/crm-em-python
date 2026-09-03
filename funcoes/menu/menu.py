@@ -68,9 +68,9 @@ class Menu_alteracao(Menu_base):
             print("Informe apenas as informações a serem alteradas: ")
 
             nome = input("Informe o nome se foi alterado: ")
-            cpf = input("Informe o cpf se foi alterado: ")
+            cpf = input("Informe o cpf/cnpj se foi alterado: ")
             tel = input("Informe o telefone se foi alterado: ")
-            end = input("Informe o telefone se foi alterado: ")
+            end = input("Informe o endereco se foi alterado: ")
 
             return alteracao(cod, tabela, nome, cpf, tel, end)
 
@@ -83,8 +83,8 @@ class Menu_exclusao(Menu_base):
                        "2. fornecedores\n"
                        "3. otica\n")
 
-        op = input("1. Cancelar por cpf/cnpj\n"
-                   "2. Cancelar por codigo\n")
+        op = int(input("1. Cancelar por cpf/cnpj\n"
+                   "2. Cancelar por codigo\n"))
         if op == 1:
             cpf = input("Informe o cpf")
             if cpf == '':

@@ -1,16 +1,16 @@
 from funcoes.database.database import *
 
 def localizar(codigo, tabela):
-    if not tabela.isalnum():
-        raise ValueError("Nome da tabela inválido")
+    validar_tabela(tabela)
 
     conexao = None
     try:
         conexao = conectar()
         cursor = conexao.cursor()
 
-        sql = (f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE id = ?,")
-        cursor.execute( sql, (codigo,))
+        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE id = ?",
+            (codigo,)
+            )
         resultado = cursor.fetchone()[0]
         return bool(resultado)
     
@@ -21,7 +21,7 @@ def localizar(codigo, tabela):
         if conexao:
             conexao.close()
 
-def alteracao(codigo,tabela,nome=None,cpf=None,telefone=None,endereco=None):
+def alteracao(codigo,tabela,nome=None,doc=None,telefone=None,endereco=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -36,9 +36,9 @@ def alteracao(codigo,tabela,nome=None,cpf=None,telefone=None,endereco=None):
         campos.append("telefone = ?")
         valores.append(telefone)
 
-    if cpf:
-        campos.append("cpf = ?")
-        valores.append(cpf)
+    if doc:
+        campos.append("doc = ?")
+        valores.append(doc)
 
     if endereco:
         campos.append("endereco = ?")

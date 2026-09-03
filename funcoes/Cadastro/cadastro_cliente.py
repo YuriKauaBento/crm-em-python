@@ -19,7 +19,7 @@ class Cadastro(ABC):
         criar_tabelas()
         
         cursor.execute(f"""
-            INSERT INTO {self.tabela} (nome, cpf, endereco, telefone) 
+            INSERT INTO {self.tabela} (nome, doc, endereco, telefone) 
             VALUES (?, ?, ?, ?)
         """, (self.nome, self.cpf, self.endereco, self.telefone))
 
