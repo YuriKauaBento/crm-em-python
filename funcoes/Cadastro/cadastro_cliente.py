@@ -1,6 +1,6 @@
 from abc import ABC
 from funcoes.database.database import *
-
+import bcrypt
 
 
 class Cadastro(ABC):
@@ -69,4 +69,35 @@ class Fornecedor(Cadastro):
         self.endereco = input('Endereco: ')
         self.telefone = input('Telefone: ')
         return super().cadastrar()
+
+
+class Usuario():
+    def __init__(self, nome='', senha='', perfil=''):
+        self.nome = nome
+        self.senha = senha
+        self.perfil = perfil
+
+    def cadastrar(self, logado):
+        criar_tabelas()
+
+        if logado.perfil != "admin":
+            return "Acesso negado"
+
+        else:
+            self.nome = input("Informe o nome do usuario: ")
+            senhan = input("Defina a senha: ")
+            self.senha = bcrypt.hashpw(
+                senhan.encode("utf-8"),
+                bcrypt.gensalt()
+            )
+            self.perfil = input("Defina o nivel de acesso: ")
+
+            conexao = conectar()
+            cursor = conexao.cursor()
+
+            cursor.execute("""
+                INSERT INTO usuarios (nome, senha_hash, perfil)
+                VALUES (?,?,?),
+            """, (self.nome, self.senha, self.perfil))
+
 

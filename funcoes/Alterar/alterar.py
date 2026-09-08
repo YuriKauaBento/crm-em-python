@@ -62,33 +62,27 @@ def alteracao(codigo,tabela,nome=None,doc=None,telefone=None,endereco=None):
     conexao.commit()
 
     conexao.close()
+    
 
-
-"""def excluir(codigo=None, cpf=None):
+def excluir(tabela=None, id=None, cpf=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    if codigo:
-        cursor.execute(
-            "UPDATE clientes SET ativo = 0 WHERE codigo = ?",
-            (codigo,)
-        )
+    if id:
+        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE id = ?",
+            (id,)
+            )
 
     elif cpf:
-        cursor.execute(
-            "UPDATE clientes SET ativo = 0 WHERE cpf = ?",
+        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE cpf = ?",
             (cpf,)
-        )
-
-    else:
-        return "Nenhum codigo ou cpf foi informado."
-    
-    conexao.commit()
+            )
 
     if cursor.rowcount > 0:
         sucesso = "Cadastro cancelado com sucesso!"
     else:
         sucesso = "Cliente não encontrado."
 
+    conexao.commit()
     conexao.close()
-    return sucesso"""
+    return sucesso
