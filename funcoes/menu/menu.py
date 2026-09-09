@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from funcoes.Alterar.alterar import *
 from funcoes.database.database import excluir
+from funcoes.Log_In.login import Sessao
 
 class Menu_base(ABC):
     def __init__(self):
@@ -60,9 +61,9 @@ class Menu_alteracao(Menu_base):
         self.msg = "ALTERACAO DE CADASTRO"
 
         tabela = input(("Informe o tipo de cliente: "))
-        cod = input("Informe o codigo do cliente: ")
+        usuario = input("Informe o usuario do cliente: ")
 
-        if localizar(cod, tabela) == 0:
+        if localizar(usuario, tabela) == 0:
             return f'Usuário não existe'
         else:
             print("Informe apenas as informações a serem alteradas: ")
@@ -72,7 +73,7 @@ class Menu_alteracao(Menu_base):
             tel = input("Informe o telefone se foi alterado: ")
             end = input("Informe o endereco se foi alterado: ")
 
-            return alteracao(cod, tabela, nome, cpf, tel, end)
+            return alteracao(usuario, tabela, nome, cpf, tel, end)
 
 
 class Menu_exclusao(Menu_base):
@@ -90,8 +91,19 @@ class Menu_exclusao(Menu_base):
             if cpf == '':
                 cpf = None
         elif op == 2:
-            codigo = input("Informe o codigo: ")
-            if codigo == '':
-                codigo = None
+            usuario = input("Informe o codigo: ")
+            if usuario == '':
+                usuario = None
 
-        return excluir(tabela, codigo, cpf)
+        return excluir(tabela, usuario, cpf)
+
+
+class Menu_login(Menu_base):
+    def exibir(self):
+        self.msg = ("Bem vindo!\n"
+                    "Informe seu usuario e senha"
+                    )
+        usuario = input("usuario: ")
+        senha = input("senha: ")
+
+        return Sessao.validar_usuario(usuario, senha)

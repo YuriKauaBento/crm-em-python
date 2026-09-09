@@ -1,32 +1,39 @@
 from funcoes.database.database import *
 import bcrypt
 
-def validar_usuario(usuario='', senhad=''):
-    conexao = conectar()
-    cursor = conexao.cursor()
 
-    usuario = input("Usuario: ")
-    senhad = input("Senha: ")
+class Sessao:
+    def __init__(self, usuario=''):
+        self.usuario = usuario
+        self.perfil = usuario["perfil"]
 
-    cursor.execute(
-        "SELECT usuario, senha FROM usuarios WHERE usuario = ?",
-        (usuario,)
-    )    
+    def validar_usuario(self, usuario='', senhad=''):
+        conexao = conectar()
+        cursor = conexao.cursor()
 
-    resultado = cursor.fetchone()
+        usuario = input("Usuario: ")
+        senhad = input("Senha: ")
 
-    if resultado is None:
-        return "Usuario nao encontrado!"
-    else:
-        usuario, senha_hash, ativo = resultado
+        cursor.execute(
+            "SELECT usuario, senha FROM usuarios WHERE usuario = ?",
+            (usuario,)
+        )    
 
-        if ativo == 0:
-            return "Usuario inativo"
+        resultado = cursor.fetchone()
 
-        if bcrypt.checkpw(
-            senhad.encode("utf-8"),
-            senha_hash.encode("utf-8")
-        ):
-            return True
+        if resultado is None:
+            return "Usuario nao encontrado!"
         else:
-            return False
+            usuario, senha_hash, ativo = resultado
+
+            if ativo == 0:
+                return "Usuario inativo"
+
+            if bcrypt.checkpw(
+                senhad.encode("utf-8"),
+                senha_hash.encode("utf-8")
+            ):
+                self.usuario = usuario
+                return self.usuario
+            else:
+                return "Senha incorreta"

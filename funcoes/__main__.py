@@ -2,8 +2,11 @@ from funcoes.Cadastro.cadastro_cliente import *
 from funcoes.menu.menu import *
 from funcoes.Consulta.consulta import *
 from funcoes.Alterar.alterar import *
+from funcoes.Log_In.login import *
 
 def main():
+    inicio = Menu_login()
+    print(f"Olá {inicio}")
     while True:
         try:
             op = int(input(Menu_inicial().exibir()))

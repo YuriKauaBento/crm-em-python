@@ -1,6 +1,6 @@
 from funcoes.database.database import *
 
-def localizar(codigo, tabela):
+def localizar(usuario, tabela):
     validar_tabela(tabela)
 
     conexao = None
@@ -8,8 +8,8 @@ def localizar(codigo, tabela):
         conexao = conectar()
         cursor = conexao.cursor()
 
-        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE id = ?",
-            (codigo,)
+        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE usuario = ?",
+            (usuario,)
             )
         resultado = cursor.fetchone()[0]
         return bool(resultado)
@@ -21,7 +21,7 @@ def localizar(codigo, tabela):
         if conexao:
             conexao.close()
 
-def alteracao(codigo,tabela,nome=None,doc=None,telefone=None,endereco=None):
+def alteracao(usuario,tabela,nome=None,doc=None,telefone=None,endereco=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
@@ -54,8 +54,8 @@ def alteracao(codigo,tabela,nome=None,doc=None,telefone=None,endereco=None):
     db = f"""
         UPDATE {tabela}
         SET {",".join(campos)}
-        WHERE id = ?,
-        {codigo,}
+        WHERE usuario = ?,
+        {usuario,}
         """
 
     cursor.execute(db, valores)
@@ -64,13 +64,13 @@ def alteracao(codigo,tabela,nome=None,doc=None,telefone=None,endereco=None):
     conexao.close()
     
 
-def excluir(tabela=None, id=None, cpf=None):
+def excluir(tabela=None, usuario=None, cpf=None):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    if id:
-        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE id = ?",
-            (id,)
+    if usuario:
+        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE usuario = ?",
+            (usuario,)
             )
 
     elif cpf:

@@ -1,13 +1,13 @@
 from funcoes.database.database import *
 
-def buscar_codigo(codigo):
+def buscar_codigo(usuario):
     conexao = conectar()
 
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE id = ? AND ativo = 1",
-        (codigo,)
+        "SELECT * FROM clientes WHERE usuario = ? AND ativo = 1",
+        (usuario,)
     )
 
     cliente = cursor.fetchone()

@@ -22,6 +22,7 @@ def criar_tabelas():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS cliente(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT GENERATED ALWAYS AS ('C' || id) STORED,
             nome TEXT NOT NULL,
             doc TEXT,
             endereco TEXT,
@@ -33,6 +34,7 @@ def criar_tabelas():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS fornecedor(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT GENERATED ALWAYS AS ('F' || id) STORED,
             nome TEXT NOT NULL,
             doc TEXT,
             endereco TEXT,
@@ -44,6 +46,7 @@ def criar_tabelas():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS otica(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT GENERATED ALWAYS AS ('O' || id) STORED,
             nome TEXT NOT NULL,
             doc TEXT,
             endereco TEXT,
