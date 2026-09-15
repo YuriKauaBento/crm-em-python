@@ -3,19 +3,21 @@ import bcrypt
 
 
 class Sessao:
-    def __init__(self, usuario=''):
+    def __init__(self, usuario, perfil=None):
         self.usuario = usuario
-        self.perfil = usuario["perfil"]
+        self.perfil = perfil
 
-    def validar_usuario(self, usuario='', senhad=''):
+    def validar_usuario(self, usuario, senhad):
         conexao = conectar()
         cursor = conexao.cursor()
 
-        usuario = input("Usuario: ")
-        senhad = input("Senha: ")
+        #usuario = input("Usuario: ")
+        #senhad = input("Senha: ")
 
         cursor.execute(
-            "SELECT usuario, senha FROM usuarios WHERE usuario = ?",
+            """SELECT usuario, senha_hash, perfil, ativo
+              FROM usuarios 
+              WHERE usuario = ?""",
             (usuario,)
         )    
 
@@ -24,7 +26,7 @@ class Sessao:
         if resultado is None:
             return "Usuario nao encontrado!"
         else:
-            usuario, senha_hash, ativo = resultado
+            usuario, senha_hash, perfil, ativo = resultado
 
             if ativo == 0:
                 return "Usuario inativo"
@@ -33,7 +35,8 @@ class Sessao:
                 senhad.encode("utf-8"),
                 senha_hash.encode("utf-8")
             ):
+                self.perfil = perfil
                 self.usuario = usuario
-                return self.usuario
+                return self.usuario, self.perfil
             else:
                 return "Senha incorreta"

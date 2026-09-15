@@ -3,7 +3,7 @@ import sqlite3
 def validar_tabela(tabela):
     tabelas_validas = {
         "cliente",
-        "fornecedor"
+        "fornecedor",
         "otica"
     }
     if tabela not in tabelas_validas:

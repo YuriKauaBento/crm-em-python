@@ -97,7 +97,8 @@ class Usuario():
 
             cursor.execute("""
                 INSERT INTO usuarios (nome, senha_hash, perfil)
-                VALUES (?,?,?),
+                VALUES (?,?,?)
             """, (self.nome, self.senha, self.perfil))
 
-
+            conexao.commit()
+            conexao.close()

@@ -106,4 +106,6 @@ class Menu_login(Menu_base):
         usuario = input("usuario: ")
         senha = input("senha: ")
 
-        return Sessao.validar_usuario(usuario, senha)
+        sessao = Sessao(usuario)
+
+        return sessao.validar_usuario(usuario, senha)

@@ -55,7 +55,6 @@ def alteracao(usuario,tabela,nome=None,doc=None,telefone=None,endereco=None):
         UPDATE {tabela}
         SET {",".join(campos)}
         WHERE usuario = ?,
-        {usuario,}
         """
 
     cursor.execute(db, valores)
