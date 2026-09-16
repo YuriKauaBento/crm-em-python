@@ -1,14 +1,12 @@
 from funcoes.database.database import *
 
 def localizar(usuario, tabela):
-    validar_tabela(tabela)
-
     conexao = None
     try:
         conexao = conectar()
         cursor = conexao.cursor()
 
-        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE usuario = ?",
+        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE usuario = ?)",
             (usuario,)
             )
         resultado = cursor.fetchone()[0]
@@ -49,12 +47,12 @@ def alteracao(usuario,tabela,nome=None,doc=None,telefone=None,endereco=None):
         conexao.close()
         return
 
-    #valores.append(codigo)
+    valores.append(usuario)
 
     db = f"""
         UPDATE {tabela}
         SET {",".join(campos)}
-        WHERE usuario = ?,
+        WHERE usuario = ?
         """
 
     cursor.execute(db, valores)

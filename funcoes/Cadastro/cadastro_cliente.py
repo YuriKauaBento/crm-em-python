@@ -1,9 +1,8 @@
-from abc import ABC
 from funcoes.database.database import *
 import bcrypt
 
 
-class Cadastro(ABC):
+class Cadastro():
     def __init__(self):
         self.nome = ''
         self.cpf = ''
@@ -15,9 +14,7 @@ class Cadastro(ABC):
     def cadastrar(self):
         conexao = conectar()
         cursor = conexao.cursor()
-        
-        criar_tabelas()
-        
+                
         cursor.execute(f"""
             INSERT INTO {self.tabela} (nome, doc, endereco, telefone) 
             VALUES (?, ?, ?, ?)
@@ -48,7 +45,7 @@ class Cliente(Cadastro):
 class Otica(Cadastro):
     def __init__(self):
         super().__init__()
-        self.tabela = 'otica'
+        self.tabela = 'oticas'
 
     def cadastrar(self):
         self.nome = input('Razão social: ')
@@ -61,7 +58,7 @@ class Otica(Cadastro):
 class Fornecedor(Cadastro):
     def __init__(self):
         super().__init__()
-        self.tabela = 'fornecedor'
+        self.tabela = 'fornecedores'
 
     def cadastrar(self):
         self.nome = input('Razao social: ')
@@ -78,8 +75,6 @@ class Usuario():
         self.perfil = perfil
 
     def cadastrar(self, logado):
-        criar_tabelas()
-
         if logado.perfil != "admin":
             return "Acesso negado"
 
@@ -89,7 +84,7 @@ class Usuario():
             self.senha = bcrypt.hashpw(
                 senhan.encode("utf-8"),
                 bcrypt.gensalt()
-            )
+            ).decode("utf-8")
             self.perfil = input("Defina o nivel de acesso: ")
 
             conexao = conectar()

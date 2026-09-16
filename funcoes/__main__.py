@@ -5,6 +5,8 @@ from funcoes.Alterar.alterar import *
 from funcoes.Log_In.login import *
 
 def main():
+    criar_tabelas()
+
     inicio = Menu_login()
     print(f"Olá {inicio}")
     while True:

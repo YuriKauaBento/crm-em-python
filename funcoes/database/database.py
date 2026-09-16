@@ -1,13 +1,13 @@
 import sqlite3
 
-def validar_tabela(tabela):
+"""def validar_tabela(tabela):
     tabelas_validas = {
-        "cliente",
-        "fornecedor",
-        "otica"
+        "clientes",
+        "fornecedores",
+        "oticas"
     }
     if tabela not in tabelas_validas:
-        raise ValueError("Tabela invalida")
+        raise ValueError("Tabela invalida")"""
 
 
 
@@ -20,7 +20,7 @@ def criar_tabelas():
     cursor = conexao.cursor()
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS cliente(
+        CREATE TABLE IF NOT EXISTS clientes(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             usuario TEXT GENERATED ALWAYS AS ('C' || id) STORED,
             nome TEXT NOT NULL,
@@ -32,7 +32,7 @@ def criar_tabelas():
     """)
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS fornecedor(
+        CREATE TABLE IF NOT EXISTS fornecedores(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             usuario TEXT GENERATED ALWAYS AS ('F' || id) STORED,
             nome TEXT NOT NULL,
@@ -44,7 +44,7 @@ def criar_tabelas():
     """)
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS otica(
+        CREATE TABLE IF NOT EXISTS oticas(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             usuario TEXT GENERATED ALWAYS AS ('O' || id) STORED,
             nome TEXT NOT NULL,

@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from funcoes.Alterar.alterar import *
-from funcoes.database.database import excluir
 from funcoes.Log_In.login import Sessao
 
 class Menu_base(ABC):
@@ -60,7 +59,20 @@ class Menu_alteracao(Menu_base):
     def exibir(self):
         self.msg = "ALTERACAO DE CADASTRO"
 
-        tabela = input(("Informe o tipo de cliente: "))
+        tabela = input("Informe o tipo de cliente: \n"
+                       "1. clientes\n"
+                       "2. fornecedores\n"
+                       "3. oticas\n")
+
+        if tabela == '1':
+            tabela = "clientes"
+        elif tabela == '2':
+            tabela = "fornecedores"
+        elif tabela == '3':
+            tabela = "oticas"
+        else:
+            print("opcao invalida!")
+
         usuario = input("Informe o usuario do cliente: ")
 
         if localizar(usuario, tabela) == 0:
@@ -80,12 +92,20 @@ class Menu_exclusao(Menu_base):
     def exibir(self):
         self.msg = "DESATIVAR CADASTRO"
         tabela = input("Informe o tipo de cadastro\n"
-                       "1. clientesn\n"
+                       "1. clientes\n"
                        "2. fornecedores\n"
-                       "3. otica\n")
+                       "3. oticas\n")
+        if tabela == '1':
+            tabela = "clientes"
+        elif tabela == '2':
+            tabela = "fornecedores"
+        elif tabela == '3':
+            tabela = "oticas"
+        else:
+            print("opcao invalida!")
 
         op = int(input("1. Cancelar por cpf/cnpj\n"
-                   "2. Cancelar por codigo\n"))
+                    "2. Cancelar por codigo de usuario\n"))
         if op == 1:
             cpf = input("Informe o cpf")
             if cpf == '':
@@ -94,6 +114,8 @@ class Menu_exclusao(Menu_base):
             usuario = input("Informe o codigo: ")
             if usuario == '':
                 usuario = None
+        else:
+            print("opcao invalida!")
 
         return excluir(tabela, usuario, cpf)
 
