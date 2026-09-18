@@ -59,33 +59,45 @@ class Menu_alteracao(Menu_base):
     def exibir(self):
         self.msg = "ALTERACAO DE CADASTRO"
 
-        tabela = input("Informe o tipo de cliente: \n"
-                       "1. clientes\n"
-                       "2. fornecedores\n"
-                       "3. oticas\n")
+        while True:
+            tabela = input("Informe o tipo de cliente: \n"
+                        "1. clientes\n"
+                        "2. fornecedores\n"
+                        "3. oticas\n"
+                        "4. voltar\n")
 
-        if tabela == '1':
-            tabela = "clientes"
-        elif tabela == '2':
-            tabela = "fornecedores"
-        elif tabela == '3':
-            tabela = "oticas"
-        else:
-            print("opcao invalida!")
+            if tabela == '1':
+                tabela = "clientes"
+                break
+            elif tabela == '2':
+                tabela = "fornecedores"
+                break
+            elif tabela == '3':
+                tabela = "oticas"
+                break
+            elif tabela == 4:
+                break
+            else:
+                print("opcao invalida!")
 
-        usuario = input("Informe o usuario do cliente: ")
+        while True:
+            if tabela == 4:
+                break
 
-        if localizar(usuario, tabela) == 0:
-            return f'Usuário não existe'
-        else:
-            print("Informe apenas as informações a serem alteradas: ")
+            usuario = input("Informe o usuario do cliente: ")
 
-            nome = input("Informe o nome se foi alterado: ")
-            cpf = input("Informe o cpf/cnpj se foi alterado: ")
-            tel = input("Informe o telefone se foi alterado: ")
-            end = input("Informe o endereco se foi alterado: ")
+            if localizar(usuario, tabela) == 0:
+                return f'Usuário não existe'
+            else:
+                print("Informe apenas as informações a serem alteradas: ")
 
-            return alteracao(usuario, tabela, nome, cpf, tel, end)
+                nome = input("Informe o nome se foi alterado: \n")
+                cpf = input("Informe o cpf/cnpj se foi alterado: \n")
+                tel = input("Informe o telefone se foi alterado: \n")
+                end = input("Informe o endereco se foi alterado: \n")
+                break
+
+        return alteracao(usuario, tabela, nome, cpf, tel, end)
 
 
 class Menu_exclusao(Menu_base):
@@ -94,28 +106,43 @@ class Menu_exclusao(Menu_base):
         tabela = input("Informe o tipo de cadastro\n"
                        "1. clientes\n"
                        "2. fornecedores\n"
-                       "3. oticas\n")
-        if tabela == '1':
-            tabela = "clientes"
-        elif tabela == '2':
-            tabela = "fornecedores"
-        elif tabela == '3':
-            tabela = "oticas"
-        else:
-            print("opcao invalida!")
+                       "3. oticas\n"
+                       "4. voltar\n")
 
-        op = int(input("1. Cancelar por cpf/cnpj\n"
-                    "2. Cancelar por codigo de usuario\n"))
-        if op == 1:
-            cpf = input("Informe o cpf")
-            if cpf == '':
-                cpf = None
-        elif op == 2:
-            usuario = input("Informe o codigo: ")
-            if usuario == '':
-                usuario = None
-        else:
-            print("opcao invalida!")
+        while True:
+            if tabela == '1':
+                tabela = "clientes"
+                break
+            elif tabela == '2':
+                tabela = "fornecedores"
+                break
+            elif tabela == '3':
+                tabela = "oticas"
+                break
+            elif tabela == 4:
+                break
+            else:
+                print("opcao invalida!")
+
+        while True:
+            if tabela == 4:
+                break
+
+            op = int(input("1. Cancelar por cpf/cnpj\n"
+                        "2. Cancelar por codigo de usuario\n"))
+            
+            if op == 1:
+                cpf = input("Informe o cpf")
+                if cpf == '':
+                    cpf = None
+                break
+            elif op == 2:
+                usuario = input("Informe o codigo: ")
+                if usuario == '':
+                    usuario = None
+                break
+            else:
+                print("opcao invalida!")
 
         return excluir(tabela, usuario, cpf)
 

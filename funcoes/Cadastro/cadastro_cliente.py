@@ -2,7 +2,7 @@ from funcoes.database.database import *
 import bcrypt
 
 
-class Cadastro():
+class Cadastro:
     def __init__(self):
         self.nome = ''
         self.cpf = ''

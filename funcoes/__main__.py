@@ -8,7 +8,7 @@ def main():
     criar_tabelas()
 
     inicio = Menu_login()
-    print(f"Olá {inicio}")
+    print(inicio.exibir())
     while True:
         try:
             op = int(input(Menu_inicial().exibir()))
@@ -64,8 +64,8 @@ def main():
 
             #elif op == 3:
 
-        except sqlite3.OperationalError as e:
-            print(f"Erro no SQLite: {e}")
+        except ValueError:
+            print("Erro! Valor de entrada inválido.")
 
 
 if __name__ == '__main__':
