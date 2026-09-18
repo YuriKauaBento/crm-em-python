@@ -75,13 +75,13 @@ class Menu_alteracao(Menu_base):
             elif tabela == '3':
                 tabela = "oticas"
                 break
-            elif tabela == 4:
+            elif tabela == '4':
                 break
             else:
                 print("opcao invalida!")
 
         while True:
-            if tabela == 4:
+            if tabela == '4':
                 break
 
             usuario = input("Informe o usuario do cliente: ")
@@ -119,13 +119,16 @@ class Menu_exclusao(Menu_base):
             elif tabela == '3':
                 tabela = "oticas"
                 break
-            elif tabela == 4:
+            elif tabela == '4':
                 break
             else:
                 print("opcao invalida!")
 
+        usuario = None
+        cpf = None
+        
         while True:
-            if tabela == 4:
+            if tabela == '4':
                 break
 
             op = int(input("1. Cancelar por cpf/cnpj\n"

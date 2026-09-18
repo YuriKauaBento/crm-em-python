@@ -7,8 +7,16 @@ from funcoes.Log_In.login import *
 def main():
     criar_tabelas()
 
-    inicio = Menu_login()
-    print(inicio.exibir())
+    while True:
+        inicio = Menu_login()
+        login = inicio.exibir()
+        if login == "Usuario nao encontrado!" or login == "Usuario inativo":
+            print(login)
+            continue
+        else:
+            print(login)
+            break
+        
     while True:
         try:
             op = int(input(Menu_inicial().exibir()))
