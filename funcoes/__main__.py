@@ -6,75 +6,78 @@ from funcoes.Log_In.login import *
 
 def main():
     criar_tabelas()
-
+    
     while True:
-        inicio = Menu_login()
-        login = inicio.exibir()
-        if login == "Usuario nao encontrado!" or login == "Usuario inativo":
-            print(login)
-            continue
-        else:
-            print(login)
-            break
-        
-    while True:
-        try:
-            op = int(input(Menu_inicial().exibir()))
+        menu = Menu_inicial()
+        menu.exibir()
+        op = int(input())
+        if op == 1:
+            valid0 = False
+            while valid0 == False:
+                menu = Menu_cadastro()
+                menu.exibir()
+                op = int(input())
+                if op == 1:
+                    nome = input("Nome do cliente:\n")
+                    cpf = input("CPF do cliente:\n")
+                    endereco = input("Endereco do cliente:\n")
+                    telefone = input("Telefone do cliente:\n")
 
-            if op == 1:
-                op_cadastro = int(input(Menu_cadastro().exibir()))
-                if op_cadastro == 1:
                     cliente = Cliente()
-                    cliente.cadastrar()
-                    print('Cliente cadastrado com sucesso!')
-                elif op_cadastro == 2:
+                    cliente.cadastrar(nome, cpf, endereco, telefone)
+                    print(f"Cliente cadastrado com sucesso! Codigo: {cliente}")
+                    valid0 = True
+                elif op == 2:
+                    nome = input("Razao social:\n")
+                    cpf = input("CNPJ:\n")
+                    endereco = input("Endereco:\n")
+                    telefone = input("Telefone:\n")
+
                     fornecedor = Fornecedor()
-                    fornecedor.cadastrar()
-                    print('Fornecedor cadastrado com sucesso!')
-                elif op_cadastro == 3:
+                    fornecedor.cadastrar(nome, cpf, endereco, telefone)
+                    print(f"Fornecedor cadastrado com sucesso! Codigo {fornecedor}")
+                    valid0 = True
+                elif op == 3:
+                    nome = input("Razao social:\n")
+                    cpf = input("CNPJ:\n")
+                    endereco = input("Endereco:\n")
+                    telefone = input("Telefone:\n")
+
                     otica = Otica()
-                    otica.cadastrar()
-                    print('Otica cadastrada com sucesso!')
-                elif op_cadastro == 4:
-                    print(Menu_alteracao().exibir())
-                elif op_cadastro == 0:
-                    continue
-                else:
-                    print("Opcao invalida!")
+                    otica.cadastrar(nome, cpf, endereco, telefone)
+                    print(f"Otica cadastrada com sucesso! Codigo{otica}")
+                    valid0 = True
+                elif op == 4:
+                    valid1 = False
+                    while valid1 == False:
+                        menu = Menu_alteracao()
+                        menu.exibir()
+                        op = int(input())
+                        tabela = ''
 
-            elif op == 0:
-                break
-            
-            elif op == 2:
-                op_consulta = 9
-                while op_consulta not in (0,1,2,3,4):
-                    try:
-                        op_consulta = int(input(Menu_consulta().exibir()))
-                        if op_consulta not in (0,1,2,3,4):
-                            print('Opcao invalida!')
-                    except ValueError:
-                        print('Digite apenas numeros!')
+                        if op == 1:
+                            tabela = 'clientes'
+                        elif op == 2:
+                            tabela = 'fornecedores'
+                        elif op == 3:
+                            tabela = 'oticas'
+                        elif op == 4:
+                            valid1 = True
 
-                if op_consulta == 1:
-                    consulta = int(input(Menu_consulta().menu_consulta()))
-                    if consulta == 1:
-                        a = input("DIgite o nome: ")
-                        print(buscar_nome(a))
-                    elif consulta == 2:
-                        a = input("Digite o telefone:")
-                        print(buscar_telefone(a))
-                    elif consulta == 3:
-                        a = input("Digite o CPF/CNPJ: ")
-                        print(buscar_cpf(a))
-                    elif consulta == 4:
-                        a = input("Digite o codigo: ")
-                        print(buscar_codigo(a))
-
-            #elif op == 3:
-
-        except ValueError:
-            print("Erro! Valor de entrada inválido.")
-
+                        usuario = input("Informe o usuario que deseja alterar:\n")
+                        loc = localizar(usuario, tabela)
+                        if loc == False:
+                            print("O usuario nao existe!")
+                        else:
+                            print("Informe apenas as informações a serem alteradas: ")
+                            
+                            nome = input("Informe o nome se foi alterado: \n")
+                            cpf = input("Informe o cpf/cnpj se foi alterado: \n")
+                            telefone = input("Informe o telefone se foi alterado: \n")
+                            endereco = input("Informe o endereco se foi alterado: \n")
+                            alteracao(usuario, tabela, nome, cpf, telefone, endereco)
+                            print("Alteracao concluida!")
+                            valid1 = True
 
 if __name__ == '__main__':
     main()

@@ -57,9 +57,14 @@ class Menu_consulta(Menu_base):
 
 class Menu_alteracao(Menu_base):
     def exibir(self):
-        self.msg = "ALTERACAO DE CADASTRO"
+        self.msg = ("ALTERACAO DE CADASTRO\n"
+                    "Informe o tipo de cliente: \n"
+                    "1. clientes\n"
+                    "2. fornecedores\n"
+                    "3. oticas\n"
+                    "4. voltar\n")
 
-        while True:
+        """while True:
             tabela = input("Informe o tipo de cliente: \n"
                         "1. clientes\n"
                         "2. fornecedores\n"
@@ -97,7 +102,8 @@ class Menu_alteracao(Menu_base):
                 end = input("Informe o endereco se foi alterado: \n")
                 break
 
-        return alteracao(usuario, tabela, nome, cpf, tel, end)
+        return alteracao(usuario, tabela, nome, cpf, tel, end)"""
+        return self.msg
 
 
 class Menu_exclusao(Menu_base):

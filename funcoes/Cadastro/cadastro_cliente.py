@@ -12,19 +12,7 @@ class Cadastro:
 
 
     def cadastrar(self):
-        conexao = conectar()
-        cursor = conexao.cursor()
-                
-        cursor.execute(f"""
-            INSERT INTO {self.tabela} (nome, doc, endereco, telefone) 
-            VALUES (?, ?, ?, ?)
-        """, (self.nome, self.cpf, self.endereco, self.telefone))
-
-        conexao.commit()
-        codigo = cursor.lastrowid
-        conexao.close()
-        
-        return codigo
+        return cadastro_db(self.tabela, self.nome, self.cpf, self.endereco, self.telefone)
 
 
     
@@ -34,11 +22,11 @@ class Cliente(Cadastro):
         super().__init__()
         self.tabela = 'clientes'
 
-    def cadastrar(self):
-        self.nome = input('Nome do cliente: ')
-        self.cpf = input('CPF: ')
-        self.endereco = input('Endereco: ')
-        self.telefone = input('Telefone: ')
+    def cadastrar(self, nome, cpf, endereco='', telefone=''):
+        self.nome = nome
+        self.cpf = cpf
+        self.endereco = endereco
+        self.telefone = telefone
         return super().cadastrar()
 
 
@@ -47,11 +35,11 @@ class Otica(Cadastro):
         super().__init__()
         self.tabela = 'oticas'
 
-    def cadastrar(self):
-        self.nome = input('Razão social: ')
-        self.cpf = input('CNPJ: ')
-        self.endereco = input('Endereco: ')
-        self.telefone = input('telefone: ')
+    def cadastrar(self, nome, cpf, endereco='', telefone=''):
+        self.nome = nome
+        self.cpf = cpf
+        self.endereco = endereco
+        self.telefone = telefone
         return super().cadastrar()
 
 
@@ -60,11 +48,11 @@ class Fornecedor(Cadastro):
         super().__init__()
         self.tabela = 'fornecedores'
 
-    def cadastrar(self):
-        self.nome = input('Razao social: ')
-        self.cpf = input('CNPJ ')
-        self.endereco = input('Endereco: ')
-        self.telefone = input('Telefone: ')
+    def cadastrar(self, nome, cpf, endereco='', telefone=''):
+        self.nome = nome
+        self.cpf = cpf
+        self.endereco = endereco
+        self.telefone = telefone
         return super().cadastrar()
 
 

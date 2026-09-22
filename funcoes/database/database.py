@@ -9,6 +9,20 @@ import sqlite3
     if tabela not in tabelas_validas:
         raise ValueError("Tabela invalida")"""
 
+def cadastro_db(tabela, nome, cpf, endereco, telefone):
+    conexao = conectar()
+    cursor = conexao.cursor()
+                
+    cursor.execute(f"""
+        INSERT INTO {tabela} (nome, doc, endereco, telefone) 
+        VALUES (?, ?, ?, ?)
+    """, (nome, cpf, endereco, telefone))
+    
+    conexao.commit()
+    codigo = cursor.lastrowid
+    conexao.close()
+            
+    return codigo
 
 
 def conectar():
