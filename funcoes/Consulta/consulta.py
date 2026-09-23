@@ -1,12 +1,12 @@
 from funcoes.database.database import *
 
-def buscar_codigo(usuario):
+def buscar_codigo(tabela, usuario):
     conexao = conectar()
 
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE usuario = ? AND ativo = 1",
+        f"SELECT * FROM {tabela} WHERE usuario = ? AND ativo = 1",
         (usuario,)
     )
 
@@ -17,13 +17,13 @@ def buscar_codigo(usuario):
     return cliente
 
 
-def buscar_nome(nome):
+def buscar_nome(tabela, nome):
     conexao = conectar()
 
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE nome LIKE ? AND ativo = 1",
+        f"SELECT * FROM {tabela} WHERE nome LIKE ? AND ativo = 1",
         (f"%{nome}%",)
     )
 
@@ -34,13 +34,13 @@ def buscar_nome(nome):
     return cliente
 
 
-def buscar_cpf(cpf):
+def buscar_cpf(tabela, cpf):
     conexao = conectar()
 
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE cpf = ? AND ativo = 1",
+        f"SELECT * FROM {tabela} WHERE cpf = ? AND ativo = 1",
         (cpf,)
     )
 
@@ -51,13 +51,13 @@ def buscar_cpf(cpf):
     return cliente
 
 
-def buscar_telefone(tel):
+def buscar_telefone(tabela, tel):
     conexao = conectar()
 
     cursor = conexao.cursor()
 
     cursor.execute(
-        "SELECT * FROM clientes WHERE telefone = ? AND ativo = 1",
+        f"SELECT * FROM {tabela} WHERE telefone = ? AND ativo = 1",
         (tel,)
     )
 

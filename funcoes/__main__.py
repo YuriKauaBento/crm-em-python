@@ -8,11 +8,11 @@ def main():
     criar_tabelas()
     
     while True:
+        valid0 = False
         menu = Menu_inicial()
         menu.exibir()
         op = int(input())
         if op == 1:
-            valid0 = False
             while valid0 == False:
                 menu = Menu_cadastro()
                 menu.exibir()
@@ -78,6 +78,72 @@ def main():
                             alteracao(usuario, tabela, nome, cpf, telefone, endereco)
                             print("Alteracao concluida!")
                             valid1 = True
+                elif op == 0:
+                    valid0 = True
+        elif op == 2:
+            while valid0 == False:
+                menu = Menu_consulta()
+                menu.exibir()
+                valid1 = False
+                op = int(input())
+                while valid1 == False:
+                    if op == 1:
+                        menu.menu_consulta()
+                        valid2 = False
+                        op = int(input())
+                        tabela = 'clientes'
+                        while valid2 == False:
+                            if op == 1:
+                                nome = input("Informe o nome do cliente:\n")
+                                print(buscar_nome(tabela, nome))
+                                valid2 = True
+                            elif op == 2:
+                                telefone = input("Informe o telefone do cliente:\n")
+                                print(buscar_telefone(tabela, telefone))
+                                valid2 = True
+                            elif op == 3:
+                                cpf = input("Informe o CPF do cliente:\n")
+                                print(buscar_cpf(tabela, telefone))
+                                valid2 = True
+                            elif op == 4:
+                                codigo = input("Informe o codigo do cliente:\n")
+                                print(buscar_codigo(tabela, codigo))
+                                valid2 = True
+                            elif op == 0:
+                                valid2 = True
+                        valid1 = True
+                    elif op == 2:
+                        menu.menu_consulta()
+                        valid2 = False
+                        op = int(input())
+                        tabela = 'fornecedores'
+                        while valid2 == False:
+                            if op == 1:
+                                nome = input("Informe o nome do fornecedor:\n")
+                                print(buscar_nome(tabela, nome))
+                                valid2 = True
+                            elif op == 2:
+                                telefone = input("Informe o telefone do fornecedor:\n")
+                                print(buscar_telefone(tabela, telefone))
+                                valid2 = True
+                            elif op == 3:
+                                cpf = input("Informe o CNPJ do fornecedor:\n")
+                                print(buscar_cpf(tabela, cpf))
+                                valid2 = True
+                            elif op == 4:
+                                codigo = input("Informe o codigo do fornecor:\n")
+                                print(buscar_codigo(tabela, cpf))
+                                valid2 = True
+                            elif op == 0:
+                                valid2 = True
+                        valid1 = True
+                    elif op == 3:
+                        menu.menu_consulta()
+
+
+                            
+
+                                
 
 if __name__ == '__main__':
     main()
