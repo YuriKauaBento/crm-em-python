@@ -1,5 +1,7 @@
 import sqlite3
 
+
+
 """def validar_tabela(tabela):
     tabelas_validas = {
         "clientes",

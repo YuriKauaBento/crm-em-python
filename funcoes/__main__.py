@@ -6,6 +6,16 @@ from funcoes.Log_In.login import *
 
 def main():
     criar_tabelas()
+
+    while True:
+        usuario = input("Usuario: ")
+        senha = input("Senha: ")
+        login = Sessao(usuario)
+        resultado = login.validar_usuario(usuario, senha)
+        if isinstance(resultado, tuple):
+            perfil = resultado[1]
+            print("login efetuado com sucesso!")
+            break
     
     while True:
         valid0 = False
@@ -139,6 +149,37 @@ def main():
                         valid1 = True
                     elif op == 3:
                         menu.menu_consulta()
+                        valid2 = False
+                        op = int(input())
+                        tabela = otica
+                        while valid2 == False:
+                            if op == 1:
+                                nome = input("Informe o nome da otica:\n")
+                                print(buscar_nome(tabela, nome))
+                                valid2 = True
+                            elif op == 2:
+                                telefone = input("Informe o telefone da otica:\n")
+                                print(buscar_telefone(tabela, telefone))
+                                valid2 = True
+                            elif op == 3:
+                                cpf = input("Informe o CNPJ da otica:\n")
+                                print(buscar_cpf(tabela, cpf))
+                                valid2 = True
+                            elif op == 4:
+                                codigo = input("Informe o codigo da otica:\n")
+                                print(buscar_codigo(tabela, codigo))
+                                valid2 = True
+                            elif op == 0:
+                                valid2 = True
+                        valid1 = True
+                    elif op == 4:
+                        pass
+                    elif op == 0:
+                        valid0 = True
+        elif op == 4:
+            pass
+        elif op == 0:
+            break
 
 
                             
