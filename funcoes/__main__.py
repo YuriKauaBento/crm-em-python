@@ -6,6 +6,7 @@ from funcoes.Log_In.login import *
 
 def main():
     criar_tabelas()
+    perfil = None
 
     while True:
         usuario = input("Usuario: ")
@@ -16,16 +17,18 @@ def main():
             perfil = resultado[1]
             print("login efetuado com sucesso!")
             break
+        else:
+            print(resultado)
     
     while True:
         valid0 = False
         menu = Menu_inicial()
-        menu.exibir()
+        print(menu.exibir())
         op = int(input())
         if op == 1:
             while valid0 == False:
                 menu = Menu_cadastro()
-                menu.exibir()
+                print(menu.exibir())
                 op = int(input())
                 if op == 1:
                     nome = input("Nome do cliente:\n")
@@ -34,8 +37,8 @@ def main():
                     telefone = input("Telefone do cliente:\n")
 
                     cliente = Cliente()
-                    cliente.cadastrar(nome, cpf, endereco, telefone)
-                    print(f"Cliente cadastrado com sucesso! Codigo: {cliente}")
+                    codigo = cliente.cadastrar(nome, cpf, endereco, telefone)
+                    print(f"Cliente cadastrado com sucesso! Codigo: {codigo}")
                     valid0 = True
                 elif op == 2:
                     nome = input("Razao social:\n")
@@ -61,7 +64,7 @@ def main():
                     valid1 = False
                     while valid1 == False:
                         menu = Menu_alteracao()
-                        menu.exibir()
+                        print(menu.exibir())
                         op = int(input())
                         tabela = ''
 
@@ -73,6 +76,7 @@ def main():
                             tabela = 'oticas'
                         elif op == 4:
                             valid1 = True
+                            break
 
                         usuario = input("Informe o usuario que deseja alterar:\n")
                         loc = localizar(usuario, tabela)
@@ -88,17 +92,25 @@ def main():
                             alteracao(usuario, tabela, nome, cpf, telefone, endereco)
                             print("Alteracao concluida!")
                             valid1 = True
+                elif op == 5:
+                    if perfil == 'admin':
+                        usuario = Usuario()
+                        usuario.cadastrar()
+
+                        print("USUARIO CADASTRADO COM SUCESSO!")
+                    else:
+                        print("ACESSO NEGADO!")
                 elif op == 0:
                     valid0 = True
         elif op == 2:
             while valid0 == False:
                 menu = Menu_consulta()
-                menu.exibir()
+                print(menu.exibir())
                 valid1 = False
                 op = int(input())
                 while valid1 == False:
                     if op == 1:
-                        menu.menu_consulta()
+                        print(menu.menu_consulta())
                         valid2 = False
                         op = int(input())
                         tabela = 'clientes'
@@ -113,7 +125,7 @@ def main():
                                 valid2 = True
                             elif op == 3:
                                 cpf = input("Informe o CPF do cliente:\n")
-                                print(buscar_cpf(tabela, telefone))
+                                print(buscar_cpf(tabela, cpf))
                                 valid2 = True
                             elif op == 4:
                                 codigo = input("Informe o codigo do cliente:\n")
@@ -123,7 +135,7 @@ def main():
                                 valid2 = True
                         valid1 = True
                     elif op == 2:
-                        menu.menu_consulta()
+                        print(menu.menu_consulta())
                         valid2 = False
                         op = int(input())
                         tabela = 'fornecedores'
@@ -142,16 +154,16 @@ def main():
                                 valid2 = True
                             elif op == 4:
                                 codigo = input("Informe o codigo do fornecor:\n")
-                                print(buscar_codigo(tabela, cpf))
+                                print(buscar_codigo(tabela, codigo))
                                 valid2 = True
                             elif op == 0:
                                 valid2 = True
                         valid1 = True
                     elif op == 3:
-                        menu.menu_consulta()
+                        print(menu.menu_consulta())
                         valid2 = False
                         op = int(input())
-                        tabela = otica
+                        tabela = 'oticas'
                         while valid2 == False:
                             if op == 1:
                                 nome = input("Informe o nome da otica:\n")

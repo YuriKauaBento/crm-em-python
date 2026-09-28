@@ -40,7 +40,7 @@ def buscar_cpf(tabela, cpf):
     cursor = conexao.cursor()
 
     cursor.execute(
-        f"SELECT * FROM {tabela} WHERE cpf = ? AND ativo = 1",
+        f"SELECT * FROM {tabela} WHERE doc = ? AND ativo = 1",
         (cpf,)
     )
 

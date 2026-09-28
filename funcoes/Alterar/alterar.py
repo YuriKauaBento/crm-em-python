@@ -71,7 +71,7 @@ def excluir(tabela=None, usuario=None, cpf=None):
             )
 
     elif cpf:
-        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE cpf = ?",
+        cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE doc = ?",
             (cpf,)
             )
 

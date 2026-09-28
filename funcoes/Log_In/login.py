@@ -24,11 +24,15 @@ class Sessao:
         resultado = cursor.fetchone()
 
         if resultado is None:
+            conexao.commit()
+            conexao.close()
             return "Usuario nao encontrado!"
         else:
             usuario, senha_hash, perfil, ativo = resultado
 
             if ativo == 0:
+                conexao.commit()
+                conexao.close()
                 return "Usuario inativo"
 
             if bcrypt.checkpw(
@@ -37,6 +41,10 @@ class Sessao:
             ):
                 self.perfil = perfil
                 self.usuario = usuario
+                conexao.commit()
+                conexao.close()
                 return self.usuario, self.perfil
             else:
+                conexao.commit()
+                conexao.close()
                 return "Senha incorreta"

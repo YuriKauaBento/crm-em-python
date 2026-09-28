@@ -1,16 +1,6 @@
 import sqlite3
 
 
-
-"""def validar_tabela(tabela):
-    tabelas_validas = {
-        "clientes",
-        "fornecedores",
-        "oticas"
-    }
-    if tabela not in tabelas_validas:
-        raise ValueError("Tabela invalida")"""
-
 def cadastro_db(tabela, nome, cpf, endereco, telefone):
     conexao = conectar()
     cursor = conexao.cursor()

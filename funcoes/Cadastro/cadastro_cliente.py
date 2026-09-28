@@ -62,26 +62,22 @@ class Usuario():
         self.senha = senha
         self.perfil = perfil
 
-    def cadastrar(self, logado):
-        if logado.perfil != "admin":
-            return "Acesso negado"
+    def cadastrar(self):
+        self.nome = input("Informe o nome do usuario: ")
+        senhan = input("Defina a senha: ")
+        self.senha = bcrypt.hashpw(
+            senhan.encode("utf-8"),
+            bcrypt.gensalt()
+        ).decode("utf-8")
+        self.perfil = input("Defina o nivel de acesso: ")
 
-        else:
-            self.nome = input("Informe o nome do usuario: ")
-            senhan = input("Defina a senha: ")
-            self.senha = bcrypt.hashpw(
-                senhan.encode("utf-8"),
-                bcrypt.gensalt()
-            ).decode("utf-8")
-            self.perfil = input("Defina o nivel de acesso: ")
+        conexao = conectar()
+        cursor = conexao.cursor()
 
-            conexao = conectar()
-            cursor = conexao.cursor()
+        cursor.execute("""
+            INSERT INTO usuarios (nome, senha_hash, perfil)
+            VALUES (?,?,?)
+        """, (self.nome, self.senha, self.perfil))
 
-            cursor.execute("""
-                INSERT INTO usuarios (nome, senha_hash, perfil)
-                VALUES (?,?,?)
-            """, (self.nome, self.senha, self.perfil))
-
-            conexao.commit()
-            conexao.close()
+        conexao.commit()
+        conexao.close()

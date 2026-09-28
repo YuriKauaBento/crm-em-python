@@ -29,6 +29,7 @@ class Menu_cadastro(Menu_base):
             "2. Cadastro de fornecedores\n"
             "3. Cadastro de oticas\n"
             "4. Alteracao de cadastro\n"
+            "5. Cadastro de usuarios\n"
             "0. Voltar\n"
         )
         return self.msg
@@ -63,46 +64,6 @@ class Menu_alteracao(Menu_base):
                     "2. fornecedores\n"
                     "3. oticas\n"
                     "4. voltar\n")
-
-        """while True:
-            tabela = input("Informe o tipo de cliente: \n"
-                        "1. clientes\n"
-                        "2. fornecedores\n"
-                        "3. oticas\n"
-                        "4. voltar\n")
-
-            if tabela == '1':
-                tabela = "clientes"
-                break
-            elif tabela == '2':
-                tabela = "fornecedores"
-                break
-            elif tabela == '3':
-                tabela = "oticas"
-                break
-            elif tabela == '4':
-                break
-            else:
-                print("opcao invalida!")
-
-        while True:
-            if tabela == '4':
-                break
-
-            usuario = input("Informe o usuario do cliente: ")
-
-            if localizar(usuario, tabela) == 0:
-                return f'Usuário não existe'
-            else:
-                print("Informe apenas as informações a serem alteradas: ")
-
-                nome = input("Informe o nome se foi alterado: \n")
-                cpf = input("Informe o cpf/cnpj se foi alterado: \n")
-                tel = input("Informe o telefone se foi alterado: \n")
-                end = input("Informe o endereco se foi alterado: \n")
-                break
-
-        return alteracao(usuario, tabela, nome, cpf, tel, end)"""
         return self.msg
 
 
