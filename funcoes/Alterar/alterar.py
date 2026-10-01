@@ -6,14 +6,14 @@ def localizar(usuario, tabela):
         conexao = conectar()
         cursor = conexao.cursor()
 
-        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE usuario = ?)",
+        cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {tabela} WHERE usuario = ? AND ativo = 1)",
             (usuario,)
             )
         resultado = cursor.fetchone()[0]
         return bool(resultado)
     
     except sqlite3.OperationalError as e:
-        print(f"Erro no SQLite: {e}")
+        print(f"ERRO NO SQLITE: {e}")
         return False
     finally:
         if conexao:
@@ -43,7 +43,7 @@ def alteracao(usuario,tabela,nome=None,doc=None,telefone=None,endereco=None):
         valores.append(endereco)
 
     if not campos:
-        print("Nenhuma informação foi alterada.")
+        print("NENHUMA INFORMACAO FOI ALTERADA.")
         conexao.close()
         return
 
@@ -76,9 +76,9 @@ def excluir(tabela=None, usuario=None, cpf=None):
             )
 
     if cursor.rowcount > 0:
-        sucesso = "Cadastro cancelado com sucesso!"
+        sucesso = "CADASTRO CANCELADO COM SUCESSO!"
     else:
-        sucesso = "Cliente não encontrado."
+        sucesso = "CLIENTE NAO ENCONTRADO."
 
     conexao.commit()
     conexao.close()

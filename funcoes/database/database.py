@@ -1,14 +1,20 @@
 import sqlite3
 
 
-def cadastro_db(tabela, nome, cpf, endereco, telefone):
+def cadastro_db(tabela, nome=None, cpf=None, endereco=None, telefone=None, senha=None, perfil=None):
     conexao = conectar()
     cursor = conexao.cursor()
-                
-    cursor.execute(f"""
-        INSERT INTO {tabela} (nome, doc, endereco, telefone) 
-        VALUES (?, ?, ?, ?)
-    """, (nome, cpf, endereco, telefone))
+
+    if tabela == 'usuarios':
+        cursor.execute(f"""
+            INSERT INTO {tabela} (nome, senha, perfil)
+            VALUES (?, ?, ?)
+        """, (nome, senha, perfil))
+    else:            
+        cursor.execute(f"""
+            INSERT INTO {tabela} (nome, doc, endereco, telefone) 
+            VALUES (?, ?, ?, ?)
+        """, (nome, cpf, endereco, telefone))
     
     conexao.commit()
     codigo = cursor.lastrowid
@@ -71,6 +77,7 @@ def criar_tabelas():
         ativo INTEGER NOT NULL DEFAULT 1
         )
 """)
+
     
     conexao.commit()
     conexao.close()

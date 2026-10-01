@@ -9,13 +9,15 @@ def main():
     perfil = None
 
     while True:
-        usuario = input("Usuario: ")
-        senha = input("Senha: ")
+        menu = Menu_login()
+        print(menu.exibir())
+        usuario = input("USUARIO: ").upper()
+        senha = input("SENHA: ")
         login = Sessao(usuario)
         resultado = login.validar_usuario(usuario, senha)
         if isinstance(resultado, tuple):
             perfil = resultado[1]
-            print("login efetuado com sucesso!")
+            print("lOGIN EFETUADO COM SUCESSO!")
             break
         else:
             print(resultado)
@@ -31,34 +33,34 @@ def main():
                 print(menu.exibir())
                 op = int(input())
                 if op == 1:
-                    nome = input("Nome do cliente:\n")
-                    cpf = input("CPF do cliente:\n")
-                    endereco = input("Endereco do cliente:\n")
-                    telefone = input("Telefone do cliente:\n")
+                    nome = input("NOME:\n").upper()
+                    cpf = input("CPF:\n").upper()
+                    endereco = input("ENDERECO:\n").upper()
+                    telefone = input("TELEFONE:\n").upper()
 
                     cliente = Cliente()
                     codigo = cliente.cadastrar(nome, cpf, endereco, telefone)
-                    print(f"Cliente cadastrado com sucesso! Codigo: {codigo}")
+                    print(f"CLIENTE CADASTRADO COM SUCESSO! CODIGO: {codigo}")
                     valid0 = True
                 elif op == 2:
-                    nome = input("Razao social:\n")
-                    cpf = input("CNPJ:\n")
-                    endereco = input("Endereco:\n")
-                    telefone = input("Telefone:\n")
+                    nome = input("RAZAO SOCIAL:\n").upper()
+                    cpf = input("CNPJ:\n").upper()
+                    endereco = input("ENDERECO:\n").upper()
+                    telefone = input("TELEFONE:\n").upper()
 
                     fornecedor = Fornecedor()
                     fornecedor.cadastrar(nome, cpf, endereco, telefone)
-                    print(f"Fornecedor cadastrado com sucesso! Codigo {fornecedor}")
+                    print(f"FORNECEDOR CADASTRADO COM SUCESSO! CODIGO: {fornecedor}")
                     valid0 = True
                 elif op == 3:
-                    nome = input("Razao social:\n")
-                    cpf = input("CNPJ:\n")
-                    endereco = input("Endereco:\n")
-                    telefone = input("Telefone:\n")
+                    nome = input("RAZAO SOCIAL:\n").upper()
+                    cpf = input("CNPJ:\n").upper()
+                    endereco = input("ENDERECO:\n").upper()
+                    telefone = input("TELEFONE:\n").upper()
 
                     otica = Otica()
                     otica.cadastrar(nome, cpf, endereco, telefone)
-                    print(f"Otica cadastrada com sucesso! Codigo{otica}")
+                    print(f"OTICA CADASTRADA COM SUCESSO! CODIGO: {otica}")
                     valid0 = True
                 elif op == 4:
                     valid1 = False
@@ -78,26 +80,27 @@ def main():
                             valid1 = True
                             break
 
-                        usuario = input("Informe o usuario que deseja alterar:\n")
+                        usuario = input("INFORME O USUARIO QUE DESEJA ALTERAR:\n")
                         loc = localizar(usuario, tabela)
                         if loc == False:
-                            print("O usuario nao existe!")
+                            print("O USUARIO NAO EXISTE!")
                         else:
-                            print("Informe apenas as informações a serem alteradas: ")
+                            print("INFORME APENAS AS INFORMACOES ALTERADAS: ")
                             
-                            nome = input("Informe o nome se foi alterado: \n")
-                            cpf = input("Informe o cpf/cnpj se foi alterado: \n")
-                            telefone = input("Informe o telefone se foi alterado: \n")
-                            endereco = input("Informe o endereco se foi alterado: \n")
+                            nome = input("INFORME O NOME SE FOI ALTERADO: \n").upper()
+                            cpf = input("INFORME O CPF/CNPJ SE FOI ALTERADO: \n").upper()
+                            telefone = input("INFORME O TELEFONE SE FOI ALTERADO: \n").upper()
+                            endereco = input("INFORME O ENDERECO SE FOI ALTERADO: \n").upper()
                             alteracao(usuario, tabela, nome, cpf, telefone, endereco)
-                            print("Alteracao concluida!")
+                            print("ALTEARACAO CONCLUIDA!")
                             valid1 = True
                 elif op == 5:
                     if perfil == 'admin':
-                        usuario = Usuario()
-                        usuario.cadastrar()
-
-                        print("USUARIO CADASTRADO COM SUCESSO!")
+                        nome = ("INFORME O NOME DO USUARIO: ").upper()
+                        senha = ("INFORME A SENHA: ").upper()
+                        perfil = ("IFORME O NIVEL DE USUARIO: ").lower()
+                        usuario = Usuario(nome, senha, perfil)
+                        print(usuario.cadastrar())
                     else:
                         print("ACESSO NEGADO!")
                 elif op == 0:

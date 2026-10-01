@@ -25,12 +25,12 @@ class Menu_inicial(Menu_base):
 class Menu_cadastro(Menu_base):
     def exibir(self):
         self.msg = (
-            "1. Cadastro de clientes\n"
-            "2. Cadastro de fornecedores\n"
-            "3. Cadastro de oticas\n"
-            "4. Alteracao de cadastro\n"
-            "5. Cadastro de usuarios\n"
-            "0. Voltar\n"
+            "1. CADASTRO DE CLIENTES\n"
+            "2. CADASTRO DE FORNECEDORES\n"
+            "3. CaADASTRO DE OTICAS\n"
+            "4. ALTERACAO DE CADASTRO\n"
+            "5. CADASTRO DE USUARIOS\n"
+            "0. VOLTAR\n"
         )
         return self.msg
 
@@ -38,43 +38,43 @@ class Menu_cadastro(Menu_base):
 class Menu_consulta(Menu_base):
     def exibir(self):
         self.msg = (
-            "1. Consulta de clientes\n"
-            "2. Consulta de fornecedores\n"
-            "3. Consulta de oticas\n"
-            "4. Consulta de ordens de servico\n"
-            "0. Voltar\n"
+            "1. CONSULTA DE CLIENTES\n"
+            "2. CONSULTA DE FORNECEDORES\n"
+            "3. CONSULTA DE OTICAS\n"
+            "4. CONSULTA DE ORDENS DE SERVICO\n"
+            "0. VOLTAR\n"
         )
         return self.msg
 
     def menu_consulta(self):
         self.msg = (
-            "1. Buscar nome\n"
-            "2. Buscar telefone\n"
-            "3. Buscar CPF/CNPJ\n"
-            "4. Buscar codigo\n"
-            "0. Voltar\n"
+            "1. BUSCAR NOME\n"
+            "2. BUSCAR TELEFONE\n"
+            "3. BUSCAR CPF/CNPJ\n"
+            "4. BUSCAR CODIGO\n"
+            "0. VOLTAR\n"
         )
         return self.msg
 
 class Menu_alteracao(Menu_base):
     def exibir(self):
         self.msg = ("ALTERACAO DE CADASTRO\n"
-                    "Informe o tipo de cliente: \n"
-                    "1. clientes\n"
-                    "2. fornecedores\n"
-                    "3. oticas\n"
-                    "4. voltar\n")
+                    "INFORME O TIPO DE CADASTRO: \n"
+                    "1. CLIENTES\n"
+                    "2. FORNECEDORES\n"
+                    "3. OTICAS\n"
+                    "4. VOLTAR\n")
         return self.msg
 
 
 class Menu_exclusao(Menu_base):
     def exibir(self):
         self.msg = "DESATIVAR CADASTRO"
-        tabela = input("Informe o tipo de cadastro\n"
-                       "1. clientes\n"
-                       "2. fornecedores\n"
-                       "3. oticas\n"
-                       "4. voltar\n")
+        tabela = input("INFORME O TIPO DE CADASTRO\n"
+                       "1. CLIENTES\n"
+                       "2. FORNECEDORES\n"
+                       "3. OTICAS\n"
+                       "4. VOLTAR\n")
 
         while True:
             if tabela == '1':
@@ -89,7 +89,7 @@ class Menu_exclusao(Menu_base):
             elif tabela == '4':
                 break
             else:
-                print("opcao invalida!")
+                print("OPCAO INVALIDA!")
 
         usuario = None
         cpf = None
@@ -98,33 +98,30 @@ class Menu_exclusao(Menu_base):
             if tabela == '4':
                 break
 
-            op = int(input("1. Cancelar por cpf/cnpj\n"
-                        "2. Cancelar por codigo de usuario\n"))
+            op = int(input("1. CANCELAR POR CPF/CNPJ\n"
+                        "2. CANCELAR POR CODIGO DE USUARIO\n"))
             
             if op == 1:
-                cpf = input("Informe o cpf")
+                cpf = input("INFORME O CPF/CNPJ: ")
                 if cpf == '':
                     cpf = None
                 break
             elif op == 2:
-                usuario = input("Informe o codigo: ")
+                usuario = input("INFORME O CODIGO: ").upper()
                 if usuario == '':
                     usuario = None
                 break
             else:
-                print("opcao invalida!")
+                print("OPCAO INVALIDA!")
 
         return excluir(tabela, usuario, cpf)
 
 
 class Menu_login(Menu_base):
     def exibir(self):
-        self.msg = ("Bem vindo!\n"
-                    "Informe seu usuario e senha"
+        self.msg = ("BEM VINDO!\n"
+                    "INFORME SEU USUARIO E SENHA\n"
                     )
-        usuario = input("usuario: ")
-        senha = input("senha: ")
 
-        sessao = Sessao(usuario)
 
-        return sessao.validar_usuario(usuario, senha)
+        return self.msg

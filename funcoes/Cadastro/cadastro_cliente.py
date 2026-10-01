@@ -57,27 +57,17 @@ class Fornecedor(Cadastro):
 
 
 class Usuario():
-    def __init__(self, nome='', senha='', perfil=''):
+    def __init__(self, nome, senha, perfil):
         self.nome = nome
         self.senha = senha
         self.perfil = perfil
 
     def cadastrar(self):
-        self.nome = input("Informe o nome do usuario: ")
-        senhan = input("Defina a senha: ")
+        senhan = self.senha
         self.senha = bcrypt.hashpw(
             senhan.encode("utf-8"),
             bcrypt.gensalt()
         ).decode("utf-8")
-        self.perfil = input("Defina o nivel de acesso: ")
 
-        conexao = conectar()
-        cursor = conexao.cursor()
-
-        cursor.execute("""
-            INSERT INTO usuarios (nome, senha_hash, perfil)
-            VALUES (?,?,?)
-        """, (self.nome, self.senha, self.perfil))
-
-        conexao.commit()
-        conexao.close()
+        cadastro_db(nome=self.nome, senha=self.senha, perfil=self.perfil)
+        return 'USUARIO CADASTRADO COM SUCESSO!'

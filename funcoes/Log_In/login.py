@@ -11,8 +11,6 @@ class Sessao:
         conexao = conectar()
         cursor = conexao.cursor()
 
-        #usuario = input("Usuario: ")
-        #senhad = input("Senha: ")
 
         cursor.execute(
             """SELECT usuario, senha_hash, perfil, ativo
@@ -26,14 +24,14 @@ class Sessao:
         if resultado is None:
             conexao.commit()
             conexao.close()
-            return "Usuario nao encontrado!"
+            return "USUARIO NAO ENCONTRADO!"
         else:
             usuario, senha_hash, perfil, ativo = resultado
 
             if ativo == 0:
                 conexao.commit()
                 conexao.close()
-                return "Usuario inativo"
+                return "USUARIO INATIVO"
 
             if bcrypt.checkpw(
                 senhad.encode("utf-8"),
@@ -47,4 +45,4 @@ class Sessao:
             else:
                 conexao.commit()
                 conexao.close()
-                return "Senha incorreta"
+                return "SENHA INCORRETA"
