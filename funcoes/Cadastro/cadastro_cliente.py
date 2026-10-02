@@ -57,17 +57,22 @@ class Fornecedor(Cadastro):
 
 
 class Usuario():
-    def __init__(self, nome, senha, perfil):
+    def __init__(self, nome, senha, perfil, sessao):
+        self.tabela = 'usuarios'
         self.nome = nome
         self.senha = senha
         self.perfil = perfil
+        self.sessao = sessao
 
     def cadastrar(self):
-        senhan = self.senha
-        self.senha = bcrypt.hashpw(
-            senhan.encode("utf-8"),
-            bcrypt.gensalt()
-        ).decode("utf-8")
+        if self.sessao != 'admin':
+            return 'ACESSO NEGADO!'
+        else:
+            senhan = self.senha
+            self.senha = bcrypt.hashpw(
+                senhan.encode("utf-8"),
+                bcrypt.gensalt()
+            ).decode("utf-8")
 
-        cadastro_db(nome=self.nome, senha=self.senha, perfil=self.perfil)
-        return 'USUARIO CADASTRADO COM SUCESSO!'
+            cadastro_db(tabela=self.tabela, nome=self.nome, senha=self.senha, perfil=self.perfil)
+            return 'USUARIO CADASTRADO COM SUCESSO!'

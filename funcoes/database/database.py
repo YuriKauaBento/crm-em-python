@@ -7,7 +7,7 @@ def cadastro_db(tabela, nome=None, cpf=None, endereco=None, telefone=None, senha
 
     if tabela == 'usuarios':
         cursor.execute(f"""
-            INSERT INTO {tabela} (nome, senha, perfil)
+            INSERT INTO {tabela} (nome, senha_hash, perfil)
             VALUES (?, ?, ?)
         """, (nome, senha, perfil))
     else:            

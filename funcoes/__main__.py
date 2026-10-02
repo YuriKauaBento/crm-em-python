@@ -35,6 +35,7 @@ def main():
                 if op == 1:
                     nome = input("NOME:\n").upper()
                     cpf = input("CPF:\n").upper()
+                    cpf = f'{cliente[:3]}.{cliente[3:6]}.{cliente[6:9]}-{cliente[9:]}'
                     endereco = input("ENDERECO:\n").upper()
                     telefone = input("TELEFONE:\n").upper()
 
@@ -45,6 +46,7 @@ def main():
                 elif op == 2:
                     nome = input("RAZAO SOCIAL:\n").upper()
                     cpf = input("CNPJ:\n").upper()
+                    cpf = f'{cliente[:2]}.{cliente[2:5]}.{cliente[5:8]}/{cliente[8:12]}-{cliente[12:]}'
                     endereco = input("ENDERECO:\n").upper()
                     telefone = input("TELEFONE:\n").upper()
 
@@ -55,6 +57,7 @@ def main():
                 elif op == 3:
                     nome = input("RAZAO SOCIAL:\n").upper()
                     cpf = input("CNPJ:\n").upper()
+                    cpf = f'{cliente[:2]}.{cliente[2:5]}.{cliente[5:8]}/{cliente[8:12]}-{cliente[12:]}'
                     endereco = input("ENDERECO:\n").upper()
                     telefone = input("TELEFONE:\n").upper()
 
@@ -95,14 +98,11 @@ def main():
                             print("ALTEARACAO CONCLUIDA!")
                             valid1 = True
                 elif op == 5:
-                    if perfil == 'admin':
-                        nome = ("INFORME O NOME DO USUARIO: ").upper()
-                        senha = ("INFORME A SENHA: ").upper()
-                        perfil = ("IFORME O NIVEL DE USUARIO: ").lower()
-                        usuario = Usuario(nome, senha, perfil)
-                        print(usuario.cadastrar())
-                    else:
-                        print("ACESSO NEGADO!")
+                    nome = input(("INFORME O NOME DO USUARIO: ")).upper()
+                    senha = input(("INFORME A SENHA: ")).upper()
+                    novo_perfil = input(("IFORME O NIVEL DE USUARIO: ")).lower()
+                    usuario = Usuario(nome, senha, novo_perfil, perfil)
+                    print(usuario.cadastrar())
                 elif op == 0:
                     valid0 = True
         elif op == 2:
@@ -119,19 +119,19 @@ def main():
                         tabela = 'clientes'
                         while valid2 == False:
                             if op == 1:
-                                nome = input("Informe o nome do cliente:\n")
+                                nome = input("INFORME O NOME DO CLIENTE:\n").upper()
                                 print(buscar_nome(tabela, nome))
                                 valid2 = True
                             elif op == 2:
-                                telefone = input("Informe o telefone do cliente:\n")
+                                telefone = input("INFORME O TELEFONE DO CLIENTE:\n").upper()
                                 print(buscar_telefone(tabela, telefone))
                                 valid2 = True
                             elif op == 3:
-                                cpf = input("Informe o CPF do cliente:\n")
+                                cpf = input("INFORME O CPF DO CLIENTE:\n").upper()
                                 print(buscar_cpf(tabela, cpf))
                                 valid2 = True
                             elif op == 4:
-                                codigo = input("Informe o codigo do cliente:\n")
+                                codigo = input("INFORME O CODIGO DO CLIENTE:\n").upper()
                                 print(buscar_codigo(tabela, codigo))
                                 valid2 = True
                             elif op == 0:
@@ -144,19 +144,19 @@ def main():
                         tabela = 'fornecedores'
                         while valid2 == False:
                             if op == 1:
-                                nome = input("Informe o nome do fornecedor:\n")
+                                nome = input("INFORME O NOME DO FORNECEDOR:\n").upper()
                                 print(buscar_nome(tabela, nome))
                                 valid2 = True
                             elif op == 2:
-                                telefone = input("Informe o telefone do fornecedor:\n")
+                                telefone = input("INFORME O TELEFONE DO FORNECEDOR:\n").upper()
                                 print(buscar_telefone(tabela, telefone))
                                 valid2 = True
                             elif op == 3:
-                                cpf = input("Informe o CNPJ do fornecedor:\n")
+                                cpf = input("INFORME O CNPJ DO FORNECEDOR:\n").upper()
                                 print(buscar_cpf(tabela, cpf))
                                 valid2 = True
                             elif op == 4:
-                                codigo = input("Informe o codigo do fornecor:\n")
+                                codigo = input("INFORME O CODIGO DO FORNECEDOR:\n").upper()
                                 print(buscar_codigo(tabela, codigo))
                                 valid2 = True
                             elif op == 0:
@@ -169,19 +169,19 @@ def main():
                         tabela = 'oticas'
                         while valid2 == False:
                             if op == 1:
-                                nome = input("Informe o nome da otica:\n")
+                                nome = input("INFORME O NOME DA OTICA:\n")
                                 print(buscar_nome(tabela, nome))
                                 valid2 = True
                             elif op == 2:
-                                telefone = input("Informe o telefone da otica:\n")
+                                telefone = input("INFORME O TELEFONE DA OTICA:\n")
                                 print(buscar_telefone(tabela, telefone))
                                 valid2 = True
                             elif op == 3:
-                                cpf = input("Informe o CNPJ da otica:\n")
+                                cpf = input("INFORME O CNPJ DA OTICA:\n")
                                 print(buscar_cpf(tabela, cpf))
                                 valid2 = True
                             elif op == 4:
-                                codigo = input("Informe o codigo da otica:\n")
+                                codigo = input("INFORME O CODIGO DA OTICA:\n")
                                 print(buscar_codigo(tabela, codigo))
                                 valid2 = True
                             elif op == 0:

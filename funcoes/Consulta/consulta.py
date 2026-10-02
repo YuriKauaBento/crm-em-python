@@ -47,7 +47,7 @@ def buscar_cpf(tabela, cpf):
     cliente = cursor.fetchone()
 
     conexao.close()
-
+    
     return cliente
 
 
