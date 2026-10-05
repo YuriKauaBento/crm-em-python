@@ -61,9 +61,43 @@ def alteracao(usuario,tabela,nome=None,doc=None,telefone=None,endereco=None):
     conexao.close()
     
 
-def excluir(tabela=None, usuario=None, cpf=None):
+def excluir(tabela):
     conexao = conectar()
     cursor = conexao.cursor()
+
+    if tabela == '1':
+        tabela = "clientes"
+    elif tabela == '2':
+        tabela = "fornecedores"
+    elif tabela == '3':
+        tabela = "oticas"
+    elif tabela == '4':
+        return
+    else:
+        return "OPCAO INVALIDA!"
+
+    usuario = None
+    cpf = None
+            
+    while True:
+        if tabela == '4':
+            break
+    
+        op = int(input("1. CANCELAR POR CPF/CNPJ\n"
+                    "2. CANCELAR POR CODIGO DE USUARIO\n"))
+                
+        if op == 1:
+            cpf = input("INFORME O CPF/CNPJ: ")
+            if cpf == '':
+                cpf = None
+            break
+        elif op == 2:
+            usuario = input("INFORME O CODIGO: ").upper()
+            if usuario == '':
+                usuario = None
+            break
+        else:
+            print("OPCAO INVALIDA!")
 
     if usuario:
         cursor.execute(f"UPDATE {tabela} SET ativo = 0 WHERE usuario = ?",

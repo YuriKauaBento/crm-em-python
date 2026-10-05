@@ -22,7 +22,6 @@ class Sessao:
         resultado = cursor.fetchone()
 
         if resultado is None:
-            conexao.commit()
             conexao.close()
             return "USUARIO NAO ENCONTRADO!"
         else:

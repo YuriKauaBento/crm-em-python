@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from funcoes.Alterar.alterar import *
-from funcoes.Log_In.login import Sessao
+#from funcoes.Log_In.login import Sessao
 
 class Menu_base(ABC):
     def __init__(self):
@@ -27,7 +27,7 @@ class Menu_cadastro(Menu_base):
         self.msg = (
             "1. CADASTRO DE CLIENTES\n"
             "2. CADASTRO DE FORNECEDORES\n"
-            "3. CaADASTRO DE OTICAS\n"
+            "3. CADASTRO DE OTICAS\n"
             "4. ALTERACAO DE CADASTRO\n"
             "5. CADASTRO DE USUARIOS\n"
             "0. VOLTAR\n"
@@ -76,45 +76,10 @@ class Menu_exclusao(Menu_base):
                        "3. OTICAS\n"
                        "4. VOLTAR\n")
 
-        while True:
-            if tabela == '1':
-                tabela = "clientes"
-                break
-            elif tabela == '2':
-                tabela = "fornecedores"
-                break
-            elif tabela == '3':
-                tabela = "oticas"
-                break
-            elif tabela == '4':
-                break
-            else:
-                print("OPCAO INVALIDA!")
-
-        usuario = None
-        cpf = None
         
-        while True:
-            if tabela == '4':
-                break
+        
 
-            op = int(input("1. CANCELAR POR CPF/CNPJ\n"
-                        "2. CANCELAR POR CODIGO DE USUARIO\n"))
-            
-            if op == 1:
-                cpf = input("INFORME O CPF/CNPJ: ")
-                if cpf == '':
-                    cpf = None
-                break
-            elif op == 2:
-                usuario = input("INFORME O CODIGO: ").upper()
-                if usuario == '':
-                    usuario = None
-                break
-            else:
-                print("OPCAO INVALIDA!")
-
-        return excluir(tabela, usuario, cpf)
+        return excluir(tabela)
 
 
 class Menu_login(Menu_base):

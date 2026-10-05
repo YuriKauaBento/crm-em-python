@@ -1,5 +1,13 @@
 from funcoes.database.database import *
 
+def validacao(cliente, conexao):
+    conexao.close()
+    if cliente:
+        return cliente
+    else:
+        return "CADASTRO NÃO ENCONTRADO!"
+        
+
 def buscar_codigo(tabela, usuario):
     conexao = conectar()
 
@@ -12,9 +20,8 @@ def buscar_codigo(tabela, usuario):
 
     cliente = cursor.fetchone()
 
-    conexao.close()
+    return validacao(cliente, conexao)
 
-    return cliente
 
 
 def buscar_nome(tabela, nome):
@@ -29,9 +36,7 @@ def buscar_nome(tabela, nome):
 
     cliente = cursor.fetchall()
 
-    conexao.close()
-
-    return cliente
+    return validacao(cliente, conexao)
 
 
 def buscar_cpf(tabela, cpf):
@@ -46,9 +51,7 @@ def buscar_cpf(tabela, cpf):
 
     cliente = cursor.fetchone()
 
-    conexao.close()
-    
-    return cliente
+    return validacao(cliente, conexao)
 
 
 def buscar_telefone(tabela, tel):
@@ -63,6 +66,4 @@ def buscar_telefone(tabela, tel):
 
     cliente = cursor.fetchone()
 
-    conexao.close()
-
-    return cliente
+    return validacao(cliente, conexao)
