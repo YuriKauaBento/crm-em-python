@@ -23,26 +23,24 @@ def main():
             print(resultado)
     
     while True:
-        valid0 = False
         menu = Menu_inicial()
         print(menu.exibir())
         op = int(input())
         if op == 1:
-            while valid0 == False:
+            while True:
                 menu = Menu_cadastro()
                 print(menu.exibir())
                 op = int(input())
                 if op == 1:
                     nome = input("NOME:\n").upper()
-                    cpf = input("CPF:\n").upper()
-                    cpf = f'{cliente[:3]}.{cliente[3:6]}.{cliente[6:9]}-{cliente[9:]}'
+                    cpf = input("CPF:\n").upper
                     endereco = input("ENDERECO:\n").upper()
                     telefone = input("TELEFONE:\n").upper()
 
                     cliente = Cliente()
                     codigo = cliente.cadastrar(nome, cpf, endereco, telefone)
                     print(f"CLIENTE CADASTRADO COM SUCESSO! CODIGO: {codigo}")
-                    valid0 = True
+                    break
                 elif op == 2:
                     nome = input("RAZAO SOCIAL:\n").upper()
                     cpf = input("CNPJ:\n").upper()
@@ -53,7 +51,7 @@ def main():
                     fornecedor = Fornecedor()
                     fornecedor.cadastrar(nome, cpf, endereco, telefone)
                     print(f"FORNECEDOR CADASTRADO COM SUCESSO! CODIGO: {fornecedor}")
-                    valid0 = True
+                    break
                 elif op == 3:
                     nome = input("RAZAO SOCIAL:\n").upper()
                     cpf = input("CNPJ:\n").upper()
@@ -64,10 +62,9 @@ def main():
                     otica = Otica()
                     otica.cadastrar(nome, cpf, endereco, telefone)
                     print(f"OTICA CADASTRADA COM SUCESSO! CODIGO: {otica}")
-                    valid0 = True
+                    break
                 elif op == 4:
-                    valid1 = False
-                    while valid1 == False:
+                    while True:
                         menu = Menu_alteracao()
                         print(menu.exibir())
                         op = int(input())
@@ -80,7 +77,6 @@ def main():
                         elif op == 3:
                             tabela = 'oticas'
                         elif op == 4:
-                            valid1 = True
                             break
 
                         usuario = input("INFORME O USUARIO QUE DESEJA ALTERAR:\n")
@@ -96,7 +92,7 @@ def main():
                             endereco = input("INFORME O ENDERECO SE FOI ALTERADO: \n").upper()
                             alteracao(usuario, tabela, nome, cpf, telefone, endereco)
                             print("ALTEARACAO CONCLUIDA!")
-                            valid1 = True
+                            break
                 elif op == 5:
                     nome = input(("INFORME O NOME DO USUARIO: ")).upper()
                     senha = input(("INFORME A SENHA: ")).upper()
@@ -104,93 +100,106 @@ def main():
                     usuario = Usuario(nome, senha, novo_perfil, perfil)
                     print(usuario.cadastrar())
                 elif op == 0:
-                    valid0 = True
+                    break
+                else:
+                    print("OPCAO INVALIDA!")
         elif op == 2:
-            while valid0 == False:
+            while True:
                 menu = Menu_consulta()
                 print(menu.exibir())
-                valid1 = False
                 op = int(input())
-                while valid1 == False:
+                while True:
                     if op == 1:
                         print(menu.menu_consulta())
-                        valid2 = False
                         op = int(input())
                         tabela = 'clientes'
-                        while valid2 == False:
+                        while True:
                             if op == 1:
                                 nome = input("INFORME O NOME DO CLIENTE:\n").upper()
                                 print(buscar_nome(tabela, nome))
-                                valid2 = True
+                                break
                             elif op == 2:
                                 telefone = input("INFORME O TELEFONE DO CLIENTE:\n").upper()
                                 print(buscar_telefone(tabela, telefone))
-                                valid2 = True
+                                break
                             elif op == 3:
                                 cpf = input("INFORME O CPF DO CLIENTE:\n").upper()
                                 print(buscar_cpf(tabela, cpf))
-                                valid2 = True
+                                break
                             elif op == 4:
                                 codigo = input("INFORME O CODIGO DO CLIENTE:\n").upper()
                                 print(buscar_codigo(tabela, codigo))
-                                valid2 = True
+                                break
                             elif op == 0:
-                                valid2 = True
-                        valid1 = True
+                                break
+                        break
                     elif op == 2:
                         print(menu.menu_consulta())
-                        valid2 = False
                         op = int(input())
                         tabela = 'fornecedores'
-                        while valid2 == False:
+                        while True:
                             if op == 1:
                                 nome = input("INFORME O NOME DO FORNECEDOR:\n").upper()
                                 print(buscar_nome(tabela, nome))
-                                valid2 = True
+                                break
                             elif op == 2:
                                 telefone = input("INFORME O TELEFONE DO FORNECEDOR:\n").upper()
                                 print(buscar_telefone(tabela, telefone))
-                                valid2 = True
+                                break
                             elif op == 3:
                                 cpf = input("INFORME O CNPJ DO FORNECEDOR:\n").upper()
                                 print(buscar_cpf(tabela, cpf))
-                                valid2 = True
+                                break
                             elif op == 4:
                                 codigo = input("INFORME O CODIGO DO FORNECEDOR:\n").upper()
                                 print(buscar_codigo(tabela, codigo))
-                                valid2 = True
+                                break
                             elif op == 0:
-                                valid2 = True
-                        valid1 = True
+                                break
+                        break
                     elif op == 3:
                         print(menu.menu_consulta())
-                        valid2 = False
                         op = int(input())
                         tabela = 'oticas'
                         while valid2 == False:
                             if op == 1:
                                 nome = input("INFORME O NOME DA OTICA:\n")
                                 print(buscar_nome(tabela, nome))
-                                valid2 = True
+                                break
                             elif op == 2:
                                 telefone = input("INFORME O TELEFONE DA OTICA:\n")
                                 print(buscar_telefone(tabela, telefone))
-                                valid2 = True
+                                break
                             elif op == 3:
                                 cpf = input("INFORME O CNPJ DA OTICA:\n")
                                 print(buscar_cpf(tabela, cpf))
-                                valid2 = True
+                                break
                             elif op == 4:
                                 codigo = input("INFORME O CODIGO DA OTICA:\n")
                                 print(buscar_codigo(tabela, codigo))
-                                valid2 = True
+                                break
                             elif op == 0:
-                                valid2 = True
-                        valid1 = True
+                                break
+                        break
                     elif op == 4:
                         pass
+                    elif op == 5:
+                        print(menu.menu_consulta_usuario())
+                        tabela = 'usuarios'
+                        op = int(input())
+                        while True:
+                            if op ==1:
+                                nome = input("INFORME O NOME DO USUARIO:\n")
+                                print(buscar_nome(tabela, nome))
+                                break
+                            elif op == 2:
+                                codigo = input("INFORME O CODIGO DO USUARIO:\n")
+                                print(buscar_codigo(tabela, codigo))
+                                break
+                            elif op == 0:
+                                break
                     elif op == 0:
-                        valid0 = True
+                        break
         elif op == 4:
             pass
         elif op == 0:

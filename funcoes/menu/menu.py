@@ -42,6 +42,7 @@ class Menu_consulta(Menu_base):
             "2. CONSULTA DE FORNECEDORES\n"
             "3. CONSULTA DE OTICAS\n"
             "4. CONSULTA DE ORDENS DE SERVICO\n"
+            "5. CONSULTA DE USUARIOS\n"
             "0. VOLTAR\n"
         )
         return self.msg
@@ -55,6 +56,15 @@ class Menu_consulta(Menu_base):
             "0. VOLTAR\n"
         )
         return self.msg
+
+    def menu_consulta_usuario(self):
+        self.msg = (
+            "1. BUSCAR NOME\n"
+            "2. BUSCAR CODIGO\n"
+            "0. VOLTAR\n"
+        )
+        return self.msg
+        
 
 class Menu_alteracao(Menu_base):
     def exibir(self):
