@@ -2,25 +2,32 @@ from funcoes.database.database import *
 
 def validacao(cliente, conexao, tabela):
     conexao.close()
-    if cliente and tabela == 'usuarios':
-        return ('--- PERFIL DO USUARIO ---\n'
-                f'COD: {cliente['usuario']}\n'
-                f'NOME: {cliente['nome']}\n'
-                ).center()
-    elif cliente and tabela != 'usuarios':
-        doc = cliente['doc']
-        if len(doc) > 11:
-            doc_format = f'{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[12:]}'
-        else:
-            doc_format = f'{doc[:3]}.{doc[3:6]}.{doc[6:9]}-{doc[9:]}'
-        return ('--- PERFIL DO USUARIO ---\n'
-                f'NOME/RAZAO SOCIAL: {cliente['nome']}\n'
-                f'COD: {cliente['usuario']}\n'
-                f'CPF/CNPJ: {doc_format}\n'
-                f'ENDERECO: {cliente['endereco']}\n'
-                f'TELEFONE: '
-                )
-    else:
+    for i in enumerate(cliente):
+        if tabela == 'usuarios':
+            return ('--- PERFIL DO USUARIO ---\n'
+                    f'COD: {cliente[i][1]}\n'
+                    f'NOME: {cliente[i][2]}\n'
+                    )
+        elif tabela != 'usuarios':
+            doc = cliente[i][3]
+            tel = cliente[i][5]
+            if tel > 10:
+                tel_format = f'({tel[:2]}) {tel[2:7]}-{tel[7:]}'
+            else:
+                tel_format = f'({tel[:2]}) {tel[2:6]}-{tel[6:]}'
+            
+            if len(doc) > 11:
+                doc_format = f'{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[12:]}'
+            else:
+                doc_format = f'{doc[:3]}.{doc[3:6]}.{doc[6:9]}-{doc[9:]}'
+            return ('--- PERFIL DO USUARIO ---\n'
+                    f'NOME/RAZAO SOCIAL: {cliente[i][2]}\n'
+                    f'COD: {cliente[i][1]}\n'
+                    f'CPF/CNPJ: {doc_format}\n'
+                    f'ENDERECO: {cliente[i][4]}\n'
+                    f'TELEFONE: {tel_format}\n'
+                    )
+    if not cliente:
         return "CADASTRO NÃO ENCONTRADO!"
         
 

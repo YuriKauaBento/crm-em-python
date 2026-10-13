@@ -80,9 +80,6 @@ def excluir(tabela):
     cpf = None
             
     while True:
-        if tabela == '4':
-            break
-    
         op = int(input("1. CANCELAR POR CPF/CNPJ\n"
                     "2. CANCELAR POR CODIGO DE USUARIO\n"))
                 
