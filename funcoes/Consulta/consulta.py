@@ -1,34 +1,55 @@
 from funcoes.database.database import *
 
 def validacao(cliente, conexao, tabela):
-    conexao.close()
-    for i in enumerate(cliente):
-        if tabela == 'usuarios':
-            return ('--- PERFIL DO USUARIO ---\n'
-                    f'COD: {cliente[i][1]}\n'
-                    f'NOME: {cliente[i][2]}\n'
-                    )
-        elif tabela != 'usuarios':
-            doc = cliente[i][3]
-            tel = cliente[i][5]
-            if tel > 10:
-                tel_format = f'({tel[:2]}) {tel[2:7]}-{tel[7:]}'
+    try:
+        if not cliente:
+            return "CADASTRO NÃO ENCONTRADO!"
+
+        if isinstance(cliente, tuple):
+            registros = [cliente]
+
+        resultado = []
+
+        for registro in registros:
+            if tabela == 'usuarios':
+                codigo = registro[2]
+                nome = registro[1]
+
+                resultado.append(
+                    "---PERFIL DO USUARIO---\n"
+                    f"CODIGO: {codigo}"
+                    f"NOME: {registro}"
+                )
             else:
-                tel_format = f'({tel[:2]}) {tel[2:6]}-{tel[6:]}'
-            
-            if len(doc) > 11:
-                doc_format = f'{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[12:]}'
-            else:
-                doc_format = f'{doc[:3]}.{doc[3:6]}.{doc[6:9]}-{doc[9:]}'
-            return ('--- PERFIL DO USUARIO ---\n'
-                    f'NOME/RAZAO SOCIAL: {cliente[i][2]}\n'
-                    f'COD: {cliente[i][1]}\n'
-                    f'CPF/CNPJ: {doc_format}\n'
-                    f'ENDERECO: {cliente[i][4]}\n'
-                    f'TELEFONE: {tel_format}\n'
-                    )
-    if not cliente:
-        return "CADASTRO NÃO ENCONTRADO!"
+                nome = registro[2]
+                codigo = registro[1]
+                doc = registro[3]
+                end = registro[4]
+                tel = registro[5]
+
+                if len(doc) == 11:
+                    doc = f'{doc[:3]}.{doc[3:6]}.{doc[6:9]}-{doc[9:]}'
+                elif len(doc)== 14:
+                    doc = f'{doc[:2]}.{doc[2:5]}.{doc[5:8]}/{doc[8:12]}-{doc[12:]}'
+
+                if len(tel) == 11:
+                    tel = f'({tel[:2]}) {tel[2:7]}-{tel[7:]}'
+                elif len(tel) == 10:
+                    tel = f'({tel[:2]}) {tel[2:6]}-{tel[6:]}'
+
+                resultado.append(
+                    "---DADOS DO CADASTRO---\n"
+                    f"CODIGO: {codigo}\n"
+                    f"NOME/RAZAO SOCIAL: {nome}\n"
+                    f"CPF/CNPJ: {doc}\n"
+                    f"ENDERECO: {end}\n"
+                    f"TELEFONE: {tel}\n"
+                )
+
+        return "\n".join(resultado)
+    finally:
+        conexao.close()
+
         
 
 def buscar_codigo(tabela, usuario):

@@ -1,9 +1,19 @@
 import sqlite3
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+DB_PATH = BASE_DIR / "banco.db"
+
+def conectar():
+    return sqlite3.connect(DB_PATH)
 
 def cadastro_db(tabela, nome=None, cpf=None, endereco=None, telefone=None, senha=None, perfil=None):
     conexao = conectar()
     cursor = conexao.cursor()
+    tabelas_validas = ['admin', 'chefe', 'comum']
+
+    if tabela not in tabelas_validas:
+        return 'PERFIL INVÁLIDO'
 
     if tabela == 'usuarios':
         cursor.execute(f"""
@@ -20,11 +30,7 @@ def cadastro_db(tabela, nome=None, cpf=None, endereco=None, telefone=None, senha
     codigo = cursor.lastrowid
     conexao.close()
             
-    return codigo
-
-
-def conectar():
-    return sqlite3.connect("banco.db")
+    return f'USUARIO CADASTRADO COM SUCESSO! CODIGO: {codigo}'
 
 
 def criar_tabelas():

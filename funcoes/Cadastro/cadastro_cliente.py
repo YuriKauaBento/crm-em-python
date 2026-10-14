@@ -74,5 +74,4 @@ class Usuario():
                 bcrypt.gensalt()
             ).decode("utf-8")
 
-            cadastro_db(tabela=self.tabela, nome=self.nome, senha=self.senha, perfil=self.perfil)
-            return 'USUARIO CADASTRADO COM SUCESSO!'
+            return cadastro_db(tabela=self.tabela, nome=self.nome, senha=self.senha, perfil=self.perfil)

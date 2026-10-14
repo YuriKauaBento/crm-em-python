@@ -97,7 +97,7 @@ def main():
                     novo_perfil = input(("IFORME O NIVEL DE USUARIO: ")).lower()
                     usuario = Usuario(nome, senha, novo_perfil, perfil)
                     print(usuario.cadastrar())
-                elif op == 0:
+                elif op =='0' :
                     break
                 else:
                     print("OPCAO INVALIDA!")
