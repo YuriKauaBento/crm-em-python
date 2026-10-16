@@ -10,12 +10,11 @@ def conectar():
 def cadastro_db(tabela, nome=None, cpf=None, endereco=None, telefone=None, senha=None, perfil=None):
     conexao = conectar()
     cursor = conexao.cursor()
-    tabelas_validas = ['admin', 'chefe', 'comum']
-
-    if tabela not in tabelas_validas:
-        return 'PERFIL INVÁLIDO'
+    perfis_validos = ['admin', 'chefe', 'comum']
 
     if tabela == 'usuarios':
+        if perfil not in perfis_validos:
+            return "PERFIL INVALIDO!"
         cursor.execute(f"""
             INSERT INTO {tabela} (nome, senha_hash, perfil)
             VALUES (?, ?, ?)
@@ -27,7 +26,13 @@ def cadastro_db(tabela, nome=None, cpf=None, endereco=None, telefone=None, senha
         """, (nome, cpf, endereco, telefone))
     
     conexao.commit()
-    codigo = cursor.lastrowid
+    id_gerado = cursor.lastrowid
+
+    cursor.execute(
+        f"SELECT usuario FROM {tabela} WHERE id = ?", (id_gerado,)
+    )
+
+    codigo = cursor.fetchone()[0]
     conexao.close()
             
     return f'USUARIO CADASTRADO COM SUCESSO! CODIGO: {codigo}'

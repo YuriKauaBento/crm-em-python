@@ -39,7 +39,7 @@ def main():
 
                     cliente = Cliente()
                     codigo = cliente.cadastrar(nome, cpf, endereco, telefone)
-                    print(f"CLIENTE CADASTRADO COM SUCESSO! CODIGO: {codigo}")
+                    print(codigo)
                     break
                 elif op == '2':
                     nome = input("RAZAO SOCIAL:\n").upper()
@@ -106,6 +106,7 @@ def main():
                 menu = Menu_consulta()
                 print(menu.exibir())
                 op = input().strip()
+                voltar = False
                 while True:
                     if op == '1':
                         print(menu.menu_consulta())
@@ -129,8 +130,9 @@ def main():
                                 print(buscar_codigo(tabela, codigo))
                                 break
                             elif op == '0':
+                                voltar = True
                                 break
-                        break
+        
                     elif op == '2':
                         print(menu.menu_consulta())
                         op = input().strip()
@@ -153,8 +155,8 @@ def main():
                                 print(buscar_codigo(tabela, codigo))
                                 break
                             elif op == '0':
+                                voltar = True
                                 break
-                        break
                     elif op == '3':
                         print(menu.menu_consulta())
                         op = input().strip()
@@ -177,8 +179,8 @@ def main():
                                 print(buscar_codigo(tabela, codigo))
                                 break
                             elif op == '0':
+                                voltar = True
                                 break
-                        break
                     elif op == '4':
                         pass
                     elif op == '5':
@@ -197,7 +199,11 @@ def main():
                             elif op == '0':
                                 break
                     elif op == '0':
+                        voltar = True
                         break
+                if voltar == True:
+                    voltar = False
+                    break
         elif op == '4':
             pass
         elif op == '0':

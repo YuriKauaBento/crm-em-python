@@ -23,14 +23,14 @@ class Sessao:
 
         if resultado is None:
             conexao.close()
-            return "USUARIO NAO ENCONTRADO!"
+            return "USUARIO NAO ENCONTRADO!\n"
         else:
             usuario, senha_hash, perfil, ativo = resultado
 
             if ativo == 0:
                 conexao.commit()
                 conexao.close()
-                return "USUARIO INATIVO"
+                return "USUARIO INATIVO\n"
 
             if bcrypt.checkpw(
                 senhad.encode("utf-8"),
