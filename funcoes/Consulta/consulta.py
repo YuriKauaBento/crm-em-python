@@ -7,6 +7,8 @@ def validacao(cliente, conexao, tabela):
 
         if isinstance(cliente, tuple):
             registros = [cliente]
+        else:
+            registros = cliente
 
         resultado = []
 
